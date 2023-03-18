@@ -1,0 +1,141 @@
+"""
+这是根据UNet模型搭建出的一个基本网络结构
+输入和输出大小是一样的，可以根据需求进行修改
+"""
+import torch
+import torch.nn as nn
+from torch.nn import functional as F
+
+from tensorboardX import SummaryWriter
+
+# 基本卷积块
+class Conv(nn.Module):
+    """卷积块"""
+    def __init__(self, C_in, C_out):
+        super(Conv, self).__init__()
+        self.layer = nn.Sequential(
+
+            nn.Conv2d(C_in, C_out, 3, 1, 1),
+            nn.BatchNorm2d(C_out),
+            # 防止过拟合
+            nn.Dropout(0.3),
+            nn.LeakyReLU(),
+
+            nn.Conv2d(C_out, C_out, 3, 1, 1),
+            nn.BatchNorm2d(C_out),
+            # 防止过拟合
+            nn.Dropout(0.4),
+            nn.LeakyReLU(),
+        )
+
+    def forward(self, x):
+        return self.layer(x)
+
+
+# 下采样模块
+class DownSampling(nn.Module):
+    def __init__(self, C):
+        super(DownSampling, self).__init__()
+        self.Down = nn.Sequential(
+            # # 使用卷积进行2倍的下采样，通道数不变
+            # nn.Conv2d(C, C, 3, 2, 1),
+            # nn.LeakyReLU()
+            # 使用最大池化层 #################
+            nn.MaxPool2d(2),
+
+        )
+
+
+
+    def forward(self, x):
+        return self.Down(x)
+
+# class DownSampling_cat(nn.Module):
+#     def __init__(self, C):
+#         super(DownSampling_cat, self).__init__()
+#         self.Down = nn.Sequential(
+#             # 使用卷积进行2倍的下采样，通道数不变
+#             nn.Conv2d(C, C, 3, 2, 1),
+#             nn.LeakyReLU()
+#         )
+#
+#     def forward(self, x, r):
+#         down = self.Down(x)
+#         input_head = x[:, 1, :, :]
+#
+#         return self.Down(x)
+
+
+# 上采样模块
+class UpSampling(nn.Module):
+
+    def __init__(self, C):
+        super(UpSampling, self).__init__()
+        # 特征图大小扩大2倍(双线性插值)，通道数减半
+        self.Up = nn.Conv2d(C, C // 2, 1, 1)  # 输入通道数，输出通道数，kernel_size, stride=1
+
+    def forward(self, x, r):
+        # 使用邻近插值进行下采样
+        up = F.interpolate(x, scale_factor=2, mode="bilinear")  # bilinear nearest
+        x = self.Up(up)
+        # 拼接，当前上采样的，
+        return torch.cat((x, r), 1)
+
+
+# 主干网络
+class UNet(nn.Module):
+
+    def __init__(self):
+        super(UNet, self).__init__()
+
+        # 4次下采样
+        self.C1 = Conv(7, 64)  # 改为输入为7 通道
+        self.D1 = DownSampling(64)  # 为通道数
+        self.C2 = Conv(64, 128)
+        self.D2 = DownSampling(128)
+        self.C3 = Conv(128, 256)
+        self.D3 = DownSampling(256)
+        self.C4 = Conv(256, 512)
+        self.D4 = DownSampling(512)
+        self.C5 = Conv(512, 1024)
+
+        # 4次上采样
+        self.U1 = UpSampling(1024)
+        self.C6 = Conv(1024, 512)  #
+        self.U2 = UpSampling(512)
+        self.C7 = Conv(512, 256)
+        self.U3 = UpSampling(256)
+        self.C8 = Conv(256, 128)
+        self.U4 = UpSampling(128)
+        self.C9 = Conv(128, 64)
+
+        self.Th = torch.nn.Sigmoid()
+        self.pred = torch.nn.Conv2d(64, 1, 3, 1, 1)  # 输出改为1个通道
+
+    def forward(self, x):
+        # 下采样部分
+        R1 = self.C1(x)
+        R2 = self.C2(self.D1(R1))
+        R3 = self.C3(self.D2(R2))
+        R4 = self.C4(self.D3(R3))
+        Y1 = self.C5(self.D4(R4))
+
+        # 上采样部分
+        # 上采样的时候需要拼接起来
+        O1 = self.C6(self.U1(Y1, R4))  # (1024 / 2 + 512) / 2 =512
+        O2 = self.C7(self.U2(O1, R3))  # 有两部分
+        O3 = self.C8(self.U3(O2, R2))
+        O4 = self.C9(self.U4(O3, R1))
+
+        # 输出预测，这里大小跟输入是一致的
+        # 可以把下采样时的中间抠出来再进行拼接，这样修改后输出就会更小
+        return self.Th(self.pred(O4))
+
+
+if __name__ == '__main__':
+    input = torch.randn(2, 7, 256, 256)
+    model = UNet()
+    print(model(input).shape)
+
+    with SummaryWriter(logdir="network_visualization") as w:
+        w.add_graph(model, input)

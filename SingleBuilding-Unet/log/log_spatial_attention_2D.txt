@@ -1,0 +1,588 @@
+ 
+------------------------------ 
+Epoch: 1
+Predict Accuracy: 0.99173
+Number of Predict Wall Right: 64994
+Number of Target Wall: 64994
+Number of Predict Wall: 65536
+Wall Accuracy(right-wall/target-wall)-important: 1.0
+Wall Proportion(right-wall/predict-wall): 0.99173
+Dice: 0.0131
+pa: 0.99173
+mpa: 0.5
+mIoU: 0.49587
+loss_val: 0.04193180799484253
+ 
+------------------------------ 
+Epoch: 2
+Predict Accuracy: 0.99174
+Number of Predict Wall Right: 64994
+Number of Target Wall: 64994
+Number of Predict Wall: 65535
+Wall Accuracy(right-wall/target-wall)-important: 1.0
+Wall Proportion(right-wall/predict-wall): 0.99174
+Dice: 0.12118
+pa: 0.99174
+mpa: 0.50053
+mIoU: 0.4964
+loss_val: 0.03678502142429352
+ 
+------------------------------ 
+Epoch: 3
+Predict Accuracy: 0.99184
+Number of Predict Wall Right: 64990
+Number of Target Wall: 64994
+Number of Predict Wall: 65521
+Wall Accuracy(right-wall/target-wall)-important: 0.99994
+Wall Proportion(right-wall/predict-wall): 0.9919
+Dice: 0.19013
+pa: 0.99184
+mpa: 0.51268
+mIoU: 0.50838
+loss_val: 0.021970927715301514
+ 
+------------------------------ 
+Epoch: 4
+Predict Accuracy: 0.992
+Number of Predict Wall Right: 64982
+Number of Target Wall: 64994
+Number of Predict Wall: 65494
+Wall Accuracy(right-wall/target-wall)-important: 0.99982
+Wall Proportion(right-wall/predict-wall): 0.99218
+Dice: 0.21223
+pa: 0.992
+mpa: 0.53471
+mIoU: 0.52979
+loss_val: 0.012515537440776825
+ 
+------------------------------ 
+Epoch: 5
+Predict Accuracy: 0.99204
+Number of Predict Wall Right: 64980
+Number of Target Wall: 64994
+Number of Predict Wall: 65488
+Wall Accuracy(right-wall/target-wall)-important: 0.99978
+Wall Proportion(right-wall/predict-wall): 0.99224
+Dice: 0.2301
+pa: 0.99204
+mpa: 0.54075
+mIoU: 0.53564
+loss_val: 0.019603900611400604
+ 
+------------------------------ 
+Epoch: 6
+Predict Accuracy: 0.99241
+Number of Predict Wall Right: 64958
+Number of Target Wall: 64994
+Number of Predict Wall: 65419
+Wall Accuracy(right-wall/target-wall)-important: 0.99945
+Wall Proportion(right-wall/predict-wall): 0.99295
+Dice: 0.2722
+pa: 0.99241
+mpa: 0.59184
+mIoU: 0.58023
+loss_val: 0.025603536516427994
+ 
+------------------------------ 
+Epoch: 7
+Predict Accuracy: 0.99227
+Number of Predict Wall Right: 64973
+Number of Target Wall: 64994
+Number of Predict Wall: 65458
+Wall Accuracy(right-wall/target-wall)-important: 0.99968
+Wall Proportion(right-wall/predict-wall): 0.99259
+Dice: 0.26758
+pa: 0.99227
+mpa: 0.56369
+mIoU: 0.55694
+loss_val: 0.03463498875498772
+ 
+------------------------------ 
+Epoch: 8
+Predict Accuracy: 0.99252
+Number of Predict Wall Right: 64959
+Number of Target Wall: 64994
+Number of Predict Wall: 65415
+Wall Accuracy(right-wall/target-wall)-important: 0.99946
+Wall Proportion(right-wall/predict-wall): 0.99303
+Dice: 0.29231
+pa: 0.99252
+mpa: 0.59552
+mIoU: 0.58445
+loss_val: 0.02108926698565483
+ 
+------------------------------ 
+Epoch: 9
+Predict Accuracy: 0.99283
+Number of Predict Wall Right: 64948
+Number of Target Wall: 64994
+Number of Predict Wall: 65371
+Wall Accuracy(right-wall/target-wall)-important: 0.99929
+Wall Proportion(right-wall/predict-wall): 0.99353
+Dice: 0.34086
+pa: 0.99283
+mpa: 0.62456
+mIoU: 0.60969
+loss_val: 0.021461427211761475
+ 
+------------------------------ 
+Epoch: 10
+Predict Accuracy: 0.99299
+Number of Predict Wall Right: 64943
+Number of Target Wall: 64994
+Number of Predict Wall: 65352
+Wall Accuracy(right-wall/target-wall)-important: 0.99922
+Wall Proportion(right-wall/predict-wall): 0.99374
+Dice: 0.35095
+pa: 0.99299
+mpa: 0.63639
+mIoU: 0.6202
+loss_val: 0.013503934256732464
+ 
+------------------------------ 
+Epoch: 11
+Predict Accuracy: 0.99295
+Number of Predict Wall Right: 64953
+Number of Target Wall: 64994
+Number of Predict Wall: 65375
+Wall Accuracy(right-wall/target-wall)-important: 0.99937
+Wall Proportion(right-wall/predict-wall): 0.99354
+Dice: 0.34335
+pa: 0.99295
+mpa: 0.62209
+mIoU: 0.60942
+loss_val: 0.023633796721696854
+ 
+------------------------------ 
+Epoch: 12
+Predict Accuracy: 0.9934
+Number of Predict Wall Right: 64932
+Number of Target Wall: 64994
+Number of Predict Wall: 65303
+Wall Accuracy(right-wall/target-wall)-important: 0.99905
+Wall Proportion(right-wall/predict-wall): 0.99432
+Dice: 0.39156
+pa: 0.9934
+mpa: 0.67099
+mIoU: 0.64878
+loss_val: 0.015356015413999557
+ 
+------------------------------ 
+Epoch: 13
+Predict Accuracy: 0.99349
+Number of Predict Wall Right: 64915
+Number of Target Wall: 64994
+Number of Predict Wall: 65263
+Wall Accuracy(right-wall/target-wall)-important: 0.99878
+Wall Proportion(right-wall/predict-wall): 0.99467
+Dice: 0.41381
+pa: 0.99349
+mpa: 0.69219
+mIoU: 0.664
+loss_val: 0.01319945976138115
+ 
+------------------------------ 
+Epoch: 14
+Predict Accuracy: 0.99324
+Number of Predict Wall Right: 64934
+Number of Target Wall: 64994
+Number of Predict Wall: 65317
+Wall Accuracy(right-wall/target-wall)-important: 0.99908
+Wall Proportion(right-wall/predict-wall): 0.99414
+Dice: 0.38785
+pa: 0.99324
+mpa: 0.65912
+mIoU: 0.63963
+loss_val: 0.022146238014101982
+ 
+------------------------------ 
+Epoch: 15
+Predict Accuracy: 0.99364
+Number of Predict Wall Right: 64923
+Number of Target Wall: 64994
+Number of Predict Wall: 65269
+Wall Accuracy(right-wall/target-wall)-important: 0.99891
+Wall Proportion(right-wall/predict-wall): 0.9947
+Dice: 0.42841
+pa: 0.99364
+mpa: 0.69411
+mIoU: 0.66842
+loss_val: 0.017271585762500763
+ 
+------------------------------ 
+Epoch: 16
+Predict Accuracy: 0.99377
+Number of Predict Wall Right: 64903
+Number of Target Wall: 64994
+Number of Predict Wall: 65221
+Wall Accuracy(right-wall/target-wall)-important: 0.9986
+Wall Proportion(right-wall/predict-wall): 0.99512
+Dice: 0.43662
+pa: 0.99377
+mpa: 0.718
+mIoU: 0.68415
+loss_val: 0.01829400099813938
+ 
+------------------------------ 
+Epoch: 17
+Predict Accuracy: 0.99361
+Number of Predict Wall Right: 64905
+Number of Target Wall: 64994
+Number of Predict Wall: 65236
+Wall Accuracy(right-wall/target-wall)-important: 0.99863
+Wall Proportion(right-wall/predict-wall): 0.99493
+Dice: 0.43499
+pa: 0.99361
+mpa: 0.70867
+mIoU: 0.67583
+loss_val: 0.0099112493917346
+ 
+------------------------------ 
+Epoch: 18
+Predict Accuracy: 0.99384
+Number of Predict Wall Right: 64913
+Number of Target Wall: 64994
+Number of Predict Wall: 65237
+Wall Accuracy(right-wall/target-wall)-important: 0.99875
+Wall Proportion(right-wall/predict-wall): 0.99503
+Dice: 0.44293
+pa: 0.99384
+mpa: 0.71264
+mIoU: 0.68244
+loss_val: 0.015339886769652367
+ 
+------------------------------ 
+Epoch: 19
+Predict Accuracy: 0.99394
+Number of Predict Wall Right: 64906
+Number of Target Wall: 64994
+Number of Predict Wall: 65216
+Wall Accuracy(right-wall/target-wall)-important: 0.99865
+Wall Proportion(right-wall/predict-wall): 0.99525
+Dice: 0.46144
+pa: 0.99394
+mpa: 0.72511
+mIoU: 0.6911
+loss_val: 0.015046346932649612
+ 
+------------------------------ 
+Epoch: 20
+Predict Accuracy: 0.99401
+Number of Predict Wall Right: 64906
+Number of Target Wall: 64994
+Number of Predict Wall: 65211
+Wall Accuracy(right-wall/target-wall)-important: 0.99865
+Wall Proportion(right-wall/predict-wall): 0.99532
+Dice: 0.47963
+pa: 0.99401
+mpa: 0.73093
+mIoU: 0.6956
+loss_val: 0.014082725159823895
+ 
+------------------------------ 
+Epoch: 21
+Predict Accuracy: 0.99414
+Number of Predict Wall Right: 64893
+Number of Target Wall: 64994
+Number of Predict Wall: 65176
+Wall Accuracy(right-wall/target-wall)-important: 0.99845
+Wall Proportion(right-wall/predict-wall): 0.99566
+Dice: 0.49617
+pa: 0.99414
+mpa: 0.74626
+mIoU: 0.70531
+loss_val: 0.010896778665482998
+ 
+------------------------------ 
+Epoch: 22
+Predict Accuracy: 0.99407
+Number of Predict Wall Right: 64895
+Number of Target Wall: 64994
+Number of Predict Wall: 65185
+Wall Accuracy(right-wall/target-wall)-important: 0.99848
+Wall Proportion(right-wall/predict-wall): 0.99555
+Dice: 0.48977
+pa: 0.99407
+mpa: 0.74039
+mIoU: 0.70177
+loss_val: 0.01899348944425583
+ 
+------------------------------ 
+Epoch: 23
+Predict Accuracy: 0.99432
+Number of Predict Wall Right: 64897
+Number of Target Wall: 64994
+Number of Predict Wall: 65172
+Wall Accuracy(right-wall/target-wall)-important: 0.99851
+Wall Proportion(right-wall/predict-wall): 0.99578
+Dice: 0.50685
+pa: 0.99432
+mpa: 0.75712
+mIoU: 0.71597
+loss_val: 0.01089922059327364
+ 
+------------------------------ 
+Epoch: 24
+Predict Accuracy: 0.99427
+Number of Predict Wall Right: 64890
+Number of Target Wall: 64994
+Number of Predict Wall: 65161
+Wall Accuracy(right-wall/target-wall)-important: 0.9984
+Wall Proportion(right-wall/predict-wall): 0.99584
+Dice: 0.50424
+pa: 0.99427
+mpa: 0.75669
+mIoU: 0.71431
+loss_val: 0.014678562059998512
+ 
+------------------------------ 
+Epoch: 25
+Predict Accuracy: 0.99416
+Number of Predict Wall Right: 64879
+Number of Target Wall: 64994
+Number of Predict Wall: 65147
+Wall Accuracy(right-wall/target-wall)-important: 0.99823
+Wall Proportion(right-wall/predict-wall): 0.99589
+Dice: 0.50669
+pa: 0.99416
+mpa: 0.75842
+mIoU: 0.71312
+loss_val: 0.01947549358010292
+ 
+------------------------------ 
+Epoch: 26
+Predict Accuracy: 0.99425
+Number of Predict Wall Right: 64897
+Number of Target Wall: 64994
+Number of Predict Wall: 65176
+Wall Accuracy(right-wall/target-wall)-important: 0.99851
+Wall Proportion(right-wall/predict-wall): 0.99572
+Dice: 0.51084
+pa: 0.99425
+mpa: 0.75151
+mIoU: 0.71137
+loss_val: 0.01547943614423275
+ 
+------------------------------ 
+Epoch: 27
+Predict Accuracy: 0.99433
+Number of Predict Wall Right: 64881
+Number of Target Wall: 64994
+Number of Predict Wall: 65141
+Wall Accuracy(right-wall/target-wall)-important: 0.99826
+Wall Proportion(right-wall/predict-wall): 0.99601
+Dice: 0.53215
+pa: 0.99433
+mpa: 0.76815
+mIoU: 0.72216
+loss_val: 0.003954601474106312
+ 
+------------------------------ 
+Epoch: 28
+Predict Accuracy: 0.99436
+Number of Predict Wall Right: 64878
+Number of Target Wall: 64994
+Number of Predict Wall: 65133
+Wall Accuracy(right-wall/target-wall)-important: 0.99822
+Wall Proportion(right-wall/predict-wall): 0.99608
+Dice: 0.53288
+pa: 0.99436
+mpa: 0.77121
+mIoU: 0.72409
+loss_val: 0.013071599416434765
+ 
+------------------------------ 
+Epoch: 29
+Predict Accuracy: 0.99466
+Number of Predict Wall Right: 64903
+Number of Target Wall: 64994
+Number of Predict Wall: 65162
+Wall Accuracy(right-wall/target-wall)-important: 0.9986
+Wall Proportion(right-wall/predict-wall): 0.99603
+Dice: 0.54116
+pa: 0.99466
+mpa: 0.76997
+mIoU: 0.73014
+loss_val: 0.009580902755260468
+ 
+------------------------------ 
+Epoch: 30
+Predict Accuracy: 0.99451
+Number of Predict Wall Right: 64871
+Number of Target Wall: 64994
+Number of Predict Wall: 65109
+Wall Accuracy(right-wall/target-wall)-important: 0.99811
+Wall Proportion(right-wall/predict-wall): 0.99634
+Dice: 0.56002
+pa: 0.99451
+mpa: 0.7899
+mIoU: 0.73767
+loss_val: 0.009375850670039654
+ 
+------------------------------ 
+Epoch: 31
+Predict Accuracy: 0.99454
+Number of Predict Wall Right: 64891
+Number of Target Wall: 64994
+Number of Predict Wall: 65146
+Wall Accuracy(right-wall/target-wall)-important: 0.99842
+Wall Proportion(right-wall/predict-wall): 0.99609
+Dice: 0.54651
+pa: 0.99454
+mpa: 0.77282
+mIoU: 0.72863
+loss_val: 0.012419825419783592
+ 
+------------------------------ 
+Epoch: 32
+Predict Accuracy: 0.99442
+Number of Predict Wall Right: 64878
+Number of Target Wall: 64994
+Number of Predict Wall: 65128
+Wall Accuracy(right-wall/target-wall)-important: 0.99822
+Wall Proportion(right-wall/predict-wall): 0.99616
+Dice: 0.53474
+pa: 0.99442
+mpa: 0.77341
+mIoU: 0.72477
+loss_val: 0.006684699095785618
+ 
+------------------------------ 
+Epoch: 33
+Predict Accuracy: 0.99443
+Number of Predict Wall Right: 64906
+Number of Target Wall: 64994
+Number of Predict Wall: 65184
+Wall Accuracy(right-wall/target-wall)-important: 0.99865
+Wall Proportion(right-wall/predict-wall): 0.99574
+Dice: 0.53591
+pa: 0.99443
+mpa: 0.75434
+mIoU: 0.71808
+loss_val: 0.02122143842279911
+ 
+------------------------------ 
+Epoch: 34
+Predict Accuracy: 0.99453
+Number of Predict Wall Right: 64878
+Number of Target Wall: 64994
+Number of Predict Wall: 65120
+Wall Accuracy(right-wall/target-wall)-important: 0.99822
+Wall Proportion(right-wall/predict-wall): 0.99628
+Dice: 0.56332
+pa: 0.99453
+mpa: 0.78388
+mIoU: 0.73382
+loss_val: 0.011389818042516708
+ 
+------------------------------ 
+Epoch: 35
+Predict Accuracy: 0.99455
+Number of Predict Wall Right: 64883
+Number of Target Wall: 64994
+Number of Predict Wall: 65130
+Wall Accuracy(right-wall/target-wall)-important: 0.99829
+Wall Proportion(right-wall/predict-wall): 0.99621
+Dice: 0.55916
+pa: 0.99455
+mpa: 0.78085
+mIoU: 0.73309
+loss_val: 0.010232800617814064
+ 
+------------------------------ 
+Epoch: 36
+Predict Accuracy: 0.99478
+Number of Predict Wall Right: 64877
+Number of Target Wall: 64994
+Number of Predict Wall: 65104
+Wall Accuracy(right-wall/target-wall)-important: 0.9982
+Wall Proportion(right-wall/predict-wall): 0.99651
+Dice: 0.57083
+pa: 0.99478
+mpa: 0.79955
+mIoU: 0.74821
+loss_val: 0.0169232040643692
+ 
+------------------------------ 
+Epoch: 37
+Predict Accuracy: 0.99472
+Number of Predict Wall Right: 64893
+Number of Target Wall: 64994
+Number of Predict Wall: 65139
+Wall Accuracy(right-wall/target-wall)-important: 0.99845
+Wall Proportion(right-wall/predict-wall): 0.99622
+Dice: 0.5693
+pa: 0.99472
+mpa: 0.78339
+mIoU: 0.73927
+loss_val: 0.006483645178377628
+ 
+------------------------------ 
+Epoch: 38
+Predict Accuracy: 0.99486
+Number of Predict Wall Right: 64877
+Number of Target Wall: 64994
+Number of Predict Wall: 65097
+Wall Accuracy(right-wall/target-wall)-important: 0.9982
+Wall Proportion(right-wall/predict-wall): 0.99662
+Dice: 0.58477
+pa: 0.99486
+mpa: 0.80596
+mIoU: 0.75367
+loss_val: 0.010252066887915134
+ 
+------------------------------ 
+Epoch: 39
+Predict Accuracy: 0.99489
+Number of Predict Wall Right: 64889
+Number of Target Wall: 64994
+Number of Predict Wall: 65120
+Wall Accuracy(right-wall/target-wall)-important: 0.99838
+Wall Proportion(right-wall/predict-wall): 0.99645
+Dice: 0.58473
+pa: 0.99489
+mpa: 0.79502
+mIoU: 0.74842
+loss_val: 0.012279263697564602
+ 
+------------------------------ 
+Epoch: 40
+Predict Accuracy: 0.99496
+Number of Predict Wall Right: 64882
+Number of Target Wall: 64994
+Number of Predict Wall: 65100
+Wall Accuracy(right-wall/target-wall)-important: 0.99828
+Wall Proportion(right-wall/predict-wall): 0.99665
+Dice: 0.60247
+pa: 0.99496
+mpa: 0.80454
+mIoU: 0.75383
+loss_val: 0.008534200489521027
+ 
+------------------------------ 
+Epoch: 41
+Predict Accuracy: 0.99498
+Number of Predict Wall Right: 64887
+Number of Target Wall: 64994
+Number of Predict Wall: 65110
+Wall Accuracy(right-wall/target-wall)-important: 0.99835
+Wall Proportion(right-wall/predict-wall): 0.99658
+Dice: 0.60267
+pa: 0.99498
+mpa: 0.80093
+mIoU: 0.75329
+loss_val: 0.012521733529865742
+ 
+------------------------------ 
+Epoch: 42
+Predict Accuracy: 0.99487
+Number of Predict Wall Right: 64881
+Number of Target Wall: 64994
+Number of Predict Wall: 65104
+Wall Accuracy(right-wall/target-wall)-important: 0.99826
+Wall Proportion(right-wall/predict-wall): 0.99657
+Dice: 0.58918
+pa: 0.99487
+mpa: 0.80257
+mIoU: 0.75196
+loss_val: 0.014152346178889275
