@@ -31,10 +31,10 @@ class LoadFloorplanTrain():
 
         self.continue_node = []
         for node in room_node:  # 做了一个分类
-            if node['category'] == 3:  # 先统计类别 # 原模型中living只可能有一个，现在是public3 ##########################
-                self.living_node = node
-            else:
-                self.continue_node.append(node)
+            # if node['category'] == 3:  # 先统计类别 # 原模型中living只可能有一个，现在是public3 不需要这么特殊 ##########################
+            #     self.living_node = node
+            # else:
+            self.continue_node.append(node)
 
         # 做掩码
         "inside_mask"

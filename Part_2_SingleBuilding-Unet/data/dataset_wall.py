@@ -25,9 +25,9 @@ class WallDataset(data.Dataset):
         NOTHING = 2
         INTERIORWALL = 1
 
-        # 添加标记点
-        living_node = floorplan.living_node
-        floorplan.add_room(living_node) # add
+        # 添加标记点  ######## living 不需要这么特殊
+        # living_node = floorplan.living_node
+        # floorplan.add_room(living_node) # add
 
         continue_node = floorplan.continue_node
         for node in continue_node:  # 会对node的种类进行判断

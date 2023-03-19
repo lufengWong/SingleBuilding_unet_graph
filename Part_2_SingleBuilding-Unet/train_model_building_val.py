@@ -275,7 +275,7 @@ if __name__ == '__main__':
     path_train_files = r"F:\dataset_U-net\train_reinforce"
     path_val_files = r'F:\dataset_U-net\val'
     path_net_save = r'F:\U-net-train-val-test\model_trained'
-    path_log_save = r'C:\Users\Administrator\Desktop\SingleBuilding-Unet-pure\log'
+    path_log_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_2_SingleBuilding-Unet\log'
 
     path_img_save = os.path.join(r'F:\U-net-train-val-test\val_img_generated', name)
 
