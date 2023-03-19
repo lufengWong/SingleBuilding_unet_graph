@@ -1,4 +1,4 @@
 ------------------------------ 
-(2023, 3, 19, 22, 47, 50)
+(2023, 3, 19, 22, 50, 4)
 F:\U-net-train-val-test\model_trained\model_spatialAttention_outline_pooling_blockForm_4Road.pth
 ------------------------------ 
