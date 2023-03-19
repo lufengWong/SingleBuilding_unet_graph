@@ -1,5 +1,6 @@
 import copy
 import copyreg
+import math
 import random
 
 import cv2
@@ -101,7 +102,7 @@ def write2pickle(train_dir, pkl_dir):
     print(f'Number of dataset: {len(train_data_names)}')
 
     pool = mp.Pool(12)
-    result = [pool.apply_async(write2pickle_single, args=(train_dir_1, pkl_dir_1, name_1, count_1))
+    result = [pool.apply_async(write2pickle_single_pic_crop, args=(train_dir_1, pkl_dir_1, name_1, count_1))
               for train_dir_1, pkl_dir_1, name_1, count_1 in
               zip([train_dir] * (len(train_data_names)), [pkl_dir] * (len(train_data_names)), train_data_names,
                   range(len(train_data_names)))]
@@ -155,12 +156,13 @@ def write2pickle_single(train_dir, pkl_dir, name, count_num):
         for w in range(shape_array[1]):
             index = index_mask[h, w]  # 遍历每一个语义分割后区域的像素点的index
             category = category_mask[h, w]  # 获得分类的标签category
-            if index > 0 and (category in category_list):  # 所有的 ==room区域== ，且类别为房间区域  # category < debut 12 ###############################
+            if index > 0 and (
+                    category in category_list):  # 所有的 ==room区域== ，且类别为房间区域  # category < debut 12 ###############################
                 if len(index_category):  # 如果已经存在数据对
                     flag = True
 
                     for i in index_category:
-                        if i[0] == index and i[1] == category :  # 如果此区域的像素点的index 存在
+                        if i[0] == index and i[1] == category:  # 如果此区域的像素点的index 存在
                             flag = False  # 为false， 一直为false
 
                     if flag:  # 如果flag是Ture则进行存入
@@ -237,22 +239,36 @@ def write2pickle_single(train_dir, pkl_dir, name, count_num):
 
     return 0
 
+
 def mask_rectangle_Cut_out(size_pic, mask_width_ratio=0.5, mask_height_ratio=0.5):
     """
     生成一个矩形遮挡
     """
-    mask_width = round(size_pic * mask_width_ratio)
-    mask_height = round(size_pic * mask_height_ratio)
+
+    size_pic = size_pic - 1
+
+    mask_width = math.ceil(size_pic * mask_width_ratio) # 取大
+    mask_height = math.ceil(size_pic * mask_height_ratio)
+
     width_available = size_pic - mask_width
     height_available = size_pic - mask_height
 
-    point_width_index_start = round(random.random() * width_available)
-    point_height_index_start = round(random.random() * height_available)
+    # 开始的位置
+    point_width_index_start = math.ceil(random.uniform(0, 0.99) * width_available) # 取小
+    point_height_index_start = math.ceil(random.uniform(0, 0.99) * height_available)
 
     points_mask = [[x, y]
-                   for x in range(point_width_index_start, point_height_index_start + mask_width)
-                   for y in range(point_height_index_start, point_height_index_start + mask_height)]
+                   for x in range(point_width_index_start, point_width_index_start + mask_width-1)
+                   for y in range(point_height_index_start, point_height_index_start + mask_height-1)]
 
+    judge = np.all(np.less(np.array(points_mask), 256))
+
+    if not judge:
+        print('111111111111111111111------------------')
+        print(points_mask)
+        print(mask_width)
+
+    assert judge, '超出坐标轴'
     return points_mask
 
 
@@ -263,13 +279,13 @@ def make_mask(array_img, list_mask, prob=1, list_channel_fill=[0, 4, 0, 0]):
     # 可能不遮挡
     if random.random() > prob:
         return array_img
+
     # < prob
     for index, fill in enumerate(list_channel_fill):
         for mask in list_mask:
-            array_img[index, :, :][mask[0], mask[1]] = fill
+            array_img[:, :, index][mask[0], mask[1]] = fill
 
     return array_img
-
 
 
 def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
@@ -280,7 +296,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
         :param name:
         :return:
         """
-    print(count_num)
+    print(count_num // (4+1))
 
     path = os.path.join(train_dir, name)
 
@@ -289,14 +305,105 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
 
     list_image_arrays = [image_array]
     for i in range(4):
-        points_mask = mask_rectangle_Cut_out(utils.size_pix, random.uniform(0,0.5), random.uniform(0,0.5))
+        points_mask = mask_rectangle_Cut_out(utils.size_pix, random.uniform(0, 0.5), random.uniform(0, 0.5))
+
+        image_array_crop = make_mask(copy.deepcopy(image_array), points_mask, prob=0.5)
+        list_image_arrays.append(image_array_crop)
+
+    for index, image_array in enumerate(list_image_arrays):  # 5 张
+        boundary_mask = image_array[:, :, 0]  # 边界
+        category_mask = image_array[:, :, 1]  # 类别
+        index_mask = image_array[:, :, 2]  # 标记index
+        inside_mask = image_array[:, :, 3]  # 区域
+
+        shape_array = image_array.shape  # （256， 256， 4）直接在每个像素点
+        index_category = []
+        room_node = []
+
+        # show_array(category_mask, 'category_mask')
+        # plt.show()
+
+        # 内部分隔墙 此时需要根据预训练采用的category进行进一步的确定########################
+        interiorWall_mask = np.zeros(category_mask.shape, dtype=np.uint8)
+        interiorWall_mask[category_mask == 6] = 1  # debut 16 to 6  预训练还是可以 其实还是16，不过还是要根据目标房间
+        # show_array(interiorWall_mask, 'wall_interior')
+        # plt.show()
+
+        ####################################
+
+        category_list = [0, 1, 2, 3]  # 根据预训练使用的图纸的位置选择，只要是三个通道就OK的 ######################################
+
+        # 内部的门
+        # interiordoor_mask = np.zeros(category_mask.shape, dtype=np.uint8)
+        # interiordoor_mask[category_mask == 17] = 1
+
+        # 所有的room区域，把类别和index区分，为了找质心
+        for h in range(shape_array[0]):
+            for w in range(shape_array[1]):
+                index = index_mask[h, w]  # 遍历每一个语义分割后区域的像素点的index
+                category = category_mask[h, w]  # 获得分类的标签category
+                if index > 0 and (
+                        category in category_list):  # 所有的 ==room区域== ，且类别为房间区域  # category < debut 12 ###############################
+                    if len(index_category):  # 如果已经存在数据对
+                        flag = True
+
+                        for i in index_category:
+                            if i[0] == index and i[1] == category:  # 如果此区域的像素点的index 存在
+                                flag = False  # 为false， 一直为false
+
+                        if flag:  # 如果flag是Ture则进行存入
+                            index_category.append((index, category))  # 是像素值 而不是 位置
+                    else:
+                        index_category.append((index, category))
 
 
+        for (index, category) in index_category:  # 遍历所有的实例分割后的标记号码以及对应的分类
+            node = {}  # 可以有很多node
+            node['category'] = int(category)  # 不同node的category可以相同
+            mask = np.zeros(index_mask.shape, dtype=np.uint8)
 
+            # add
+            judge1 = index_mask == index
+            judge2 = category_mask == category
+            judge_intersect = judge1 & judge2
+
+            mask[judge_intersect] = 1  # 所有实例分割后编号和所需要的编号的区域， 的像素值为1
+
+            node['centroid'] = utils.compute_centroid(mask)  # 计算质心
+            room_node.append(node)  # 添加质心的位置 {category:(x,y)}
+
+        # print('----------')
+        # print(room_node)
+
+        list_room_nodes = [list(point['centroid']) for point in room_node]
+        # print(list_room_nodes)
+        room_node_mask = np.zeros(category_mask.shape, dtype=np.uint8)
+        for point in list_room_nodes:
+            room_node_mask[point[0], point[1]] = 255
+
+        # show_array(room_node_mask, 'room_node')
+        # plt.show()
+
+        # 膨胀质点
+        # kernel_dilate = np.ones((4, 4), np.uint8)
+        # img_dilate = cv2.dilate(room_node_mask, kernel_dilate, iterations=1)
+        # show_array(img_dilate, 'room_node_dilate')
+        # plt.show()
+
+        # 将再次处理后的信息存入pkl文件
+        pkl_path = path.replace(train_dir, pkl_dir)  # 将原图片的路径改为pkl的路径
+        pkl_path = pkl_path.replace('.png', str(index + 1) + '.pkl')  # 将原图片的png改为pkl后缀
+        # 上述两步骤操作只是创创建了新的文件
+        pkl_file = open(pkl_path, 'wb')
+        # 保存了 内部区域的标注，外部墙的标记，内部墙的标记，字典-房间的质点  # 其实只有这些
+        pickle.dump([inside_mask, boundary_mask, interiorWall_mask, room_node], pkl_file,
+                    protocol=pickle.HIGHEST_PROTOCOL)
+        pkl_file.close()
+
+    return 0
 
 
 if __name__ == '__main__':
-
     # # Lufeng Wang ###################
     # train_dir =f'dataset\\png'
     # train_data_path = [os.path.join(train_dir, path) for path in os.listdir(train_dir)]
@@ -315,6 +422,7 @@ if __name__ == '__main__':
     # dataset_floorplan = r"F:\data_zjkj\dataset_png_other_clear"
     #
     # train_dataset_dir = r"F:\dataset_pkl\train_pic"
+    train_dataset_dir = r'F:\dataset_U-net\train_pic'
     # val_dataset_dir = r"F:\dataset_pkl\val_pic"
     #
     # # 先分成两类，训练集和验证集
@@ -337,29 +445,30 @@ if __name__ == '__main__':
     #         # print('valuate')
     #         shutil.copy(os.path.join(dataset_floorplan, pic), os.path.join(val_dataset_dir, pic))
     #
-    # # 进行数据的处理和保存
+    # 进行数据的处理和保存
     # train_pickle_dir = r"F:\dataset_pkl\train"
+    train_pickle_dir = r'F:\dataset_U-net\train_reinforce'
     # val_pickle_dir = r"F:\dataset_pkl\val"
     #
-    # # # 如果存在处理后的数据则进行删除
-    # # if os.path.exists(train_pickle_dir):
-    # #     shutil.rmtree(train_pickle_dir)
-    # # os.mkdir(train_pickle_dir)
+    # 如果存在处理后的数据则进行删除
+    if os.path.exists(train_pickle_dir):
+        shutil.rmtree(train_pickle_dir)
+    os.mkdir(train_pickle_dir)
     # #
     # # if os.path.exists(val_pickle_dir):
     # #     shutil.rmtree(val_pickle_dir)
     # # os.mkdir(val_pickle_dir)
     #
-    # write2pickle(train_dataset_dir, train_pickle_dir)
+    write2pickle(train_dataset_dir, train_pickle_dir)
     # write2pickle(val_dataset_dir, val_pickle_dir)
 
-    # 转化验证集 ###############
-    dataset_dir_other = r'F:\data_zjkj\data_png_exam\other'
-    dataset_dir_zjkj = r'F:\data_zjkj\data_png_exam\zjkj'
-    pickle_dir = r'F:\dataset_pkl\exam_pkl\all'
-
-    # if os.path.exists(pickle_dir):
-    #     shutil.rmtree(pickle_dir)
-    # os.mkdir(pickle_dir)
-
-    write2pickle(dataset_dir_zjkj, pickle_dir)
+    # # 转化验证集 ####################################
+    # dataset_dir_other = r'F:\data_zjkj\data_png_exam\other'
+    # dataset_dir_zjkj = r'F:\data_zjkj\data_png_exam\zjkj'
+    # pickle_dir = r'F:\dataset_pkl\exam_pkl\all'
+    #
+    # # if os.path.exists(pickle_dir):
+    # #     shutil.rmtree(pickle_dir)
+    # # os.mkdir(pickle_dir)
+    #
+    # write2pickle(dataset_dir_zjkj, pickle_dir)

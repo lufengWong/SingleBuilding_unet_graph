@@ -4,6 +4,7 @@
 # @WeChat  : tofind404
 # @File    : ex1.py
 # @Software: PyCharm
+import math
 import random
 
 import numpy as np
@@ -91,16 +92,66 @@ def show_array(array_img, name):
 #
 #     return array_img
 
+#
+# array_random = np.random.randint(5, 7, (4, 256, 256))
+# show_array(array_random[0, :, :], '0')
+# plt.show()
+#
+# list_points = mask_rectangle_Cut_out(256, 0.5, 0.5)
+# plt.scatter(np.array(list_points).reshape(-1, 2)[:, 0], np.array(list_points).reshape(-1, 2)[:, 1])
+# plt.show()
+#
+# array_random = make_mask(array_random, list_points, list_channel_fill=[0, 4, 0, 0])
+# for i in range(0, 4):
+#     show_array(array_random[i, :, :], str(i))
+#     plt.show()
 
-array_random = np.random.randint(5, 7, (4, 256, 256))
-show_array(array_random[0, :, :], '0')
-plt.show()
 
-list_points = mask_rectangle_Cut_out(256, 0.5, 0.5)
-plt.scatter(np.array(list_points).reshape(-1, 2)[:, 0], np.array(list_points).reshape(-1, 2)[:, 1])
-plt.show()
+def mask_rectangle_Cut_out(size_pic, mask_width_ratio=0.5, mask_height_ratio=0.5):
+    """
+    生成一个矩形遮挡
+    """
 
-array_random = make_mask(array_random, list_points, list_channel_fill=[0, 4, 0, 0])
-for i in range(0, 4):
-    show_array(array_random[i, :, :], str(i))
-    plt.show()
+    size_pic = size_pic -1
+
+    mask_width = math.ceil(size_pic * mask_width_ratio) # 取大
+    mask_height = math.ceil(size_pic * mask_height_ratio)
+
+    width_available = size_pic - mask_width
+    height_available = size_pic - mask_height
+
+    point_width_index_start = math.ceil(random.uniform(0,0.99) * width_available) # 取小
+    point_height_index_start = math.ceil(random.uniform(0,0.99) * height_available)
+
+    points_mask = [[x, y]
+                   for x in range(point_width_index_start, point_height_index_start + mask_width)
+                   for y in range(point_height_index_start, point_height_index_start + mask_height)]
+
+    for point in points_mask:
+        [x, y] = point
+        if x >= 255:
+            print('fuck x')
+        if y >= 255:
+            print('fuck y')
+
+    return points_mask
+
+# for i in range(1000):
+
+
+import numpy as np
+
+a = np.array([[100, 200, 300]]) # sample array
+b = np.less(a, 255) # compare each element with 255
+print(b) # print the boolean array
+# [ True  True False]
+c = np.all(b) # check if all elements are True
+print(c) # print the result
+# False
+
+k = math.floor(random.uniform(0, 0.9))
+print(k)
+
+
+
+
