@@ -16,6 +16,9 @@
 #               (15, 'FrontDoor'),
 #               (16, 'InteriorWall'),
 #               (17, 'InteriorDoor')]
+size_pix = 256
+size_grid = 192
+value_step = 100
 
 room_label = [
               (0, 'Apartment'),

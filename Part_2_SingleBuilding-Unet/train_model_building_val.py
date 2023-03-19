@@ -272,6 +272,8 @@ if __name__ == '__main__':
 
     name = 'spatialAttention_outline_pooling_blockForm_4Road'  # ##########
 
+    path_train_files = r"F:\dataset_pkl\train"
+    path_val_files = r'F:\dataset_pkl\val'
     path_net_save = r'F:\model_trained\u_net'
     path_log_save = r'C:\Users\Administrator\Desktop\SingleBuilding-Unet-pure\log'
 
@@ -280,8 +282,8 @@ if __name__ == '__main__':
         shutil.rmtree(path_img_save)
     os.makedirs(path_img_save)
 
-    t = Trainer(r"F:\dataset_pkl\train",
-                r"F:\dataset_pkl\val",
+    t = Trainer(path_train=path_train_files,
+                path_val=path_val_files,
                 model=os.path.join(path_net_save, 'model_' + name + '.pth'),
                 model_copy=os.path.join(path_net_save, 'model_{}_{}_UNet_' + name + '.pth'),
                 img_save_path=path_img_save,
