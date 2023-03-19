@@ -170,30 +170,6 @@ def write2pickle_single(train_dir, pkl_dir, name, count_num):
                 else:
                     index_category.append((index, category))
 
-    # print('index_category')
-    # print(index_category)
-
-    # # 在这里寻找需要的墙边界 不准确了
-    # for (index, category) in index_category:
-    #     img_cate = np.zeros((256, 256))
-    #
-    #     judge1 = category_mask == category
-    #     judge2 = index_mask == index
-    #     judge_intersect = judge1 & judge2
-    #     img_cate[judge_intersect] = 255
-    #
-    #     # show_array(img_cate, 'this')
-    #     # plt.show()
-    #
-    #     img_bound, _ = get_piex_outline(img_cate, 1, 0, 0)
-    #     interiorWall_mask[img_bound == 1] = 1
-    #
-    # #     show_array(interiorWall_mask, 'this')
-    # #     plt.show()
-    # #
-    # show_array(interiorWall_mask, 'all')
-    # plt.title('12')
-    # plt.show()
 
     for (index, category) in index_category:  # 遍历所有的实例分割后的标记号码以及对应的分类
         node = {}  # 可以有很多node
@@ -296,7 +272,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
         :param name:
         :return:
         """
-    print(count_num // (4+1))
+    print(count_num// (4+1), count_num % (4+1))
 
     path = os.path.join(train_dir, name)
 
@@ -310,7 +286,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
         image_array_crop = make_mask(copy.deepcopy(image_array), points_mask, prob=0.5)
         list_image_arrays.append(image_array_crop)
 
-    for index, image_array in enumerate(list_image_arrays):  # 5 张
+    for index_crop, image_array in enumerate(list_image_arrays):  # 5 张
         boundary_mask = image_array[:, :, 0]  # 边界
         category_mask = image_array[:, :, 1]  # 类别
         index_mask = image_array[:, :, 2]  # 标记index
@@ -392,7 +368,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
 
         # 将再次处理后的信息存入pkl文件
         pkl_path = path.replace(train_dir, pkl_dir)  # 将原图片的路径改为pkl的路径
-        pkl_path = pkl_path.replace('.png', str(index + 1) + '.pkl')  # 将原图片的png改为pkl后缀
+        pkl_path = pkl_path.replace('.png', '_'+str(index_crop + 1) + '.pkl')  # 将原图片的png改为pkl后缀
         # 上述两步骤操作只是创创建了新的文件
         pkl_file = open(pkl_path, 'wb')
         # 保存了 内部区域的标注，外部墙的标记，内部墙的标记，字典-房间的质点  # 其实只有这些
