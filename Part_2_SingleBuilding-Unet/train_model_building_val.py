@@ -164,7 +164,7 @@ class Trainer:
         # 可以使用其他损失，比如DiceLoss、FocalLoss之类的
         self.loss_func = nn.BCELoss()  # 二分类问题
         # 设备好，batch_size和num_workers可以给大点
-        self.loader = DataLoader(WallDataset(data_root=path_train, mask_size=2), batch_size=8, shuffle=True,
+        self.loader = DataLoader(WallDataset(data_root=path_train, mask_size=2), batch_size=16, shuffle=True,
                                  num_workers=4)
         # add
         self.loader_val = DataLoader(WallDataset(data_root=path_val, mask_size=2), batch_size=8, shuffle=True,
