@@ -2,7 +2,7 @@ import os
 import pickle
 
 import numpy as np
-from network_candidates import unet_attention_building_spatialAttention_outline_pooling_blockForm as unet
+from network_candidates import unet_building as unet
 import torch
 
 from torchvision.utils import save_image
@@ -39,7 +39,7 @@ def synth(path_image_input, path_image_output):
 
     # 网络
     net = unet.UNet().to(device)
-    model = r'C:\Users\Administrator\Desktop\SingleBuilding-Unet-pure\network_trained\model_56_0.0021298888605087996_UNet_spatialAttention_outline_pooling_blockForm_4Road.pth'
+    model = r'F:\U-net-train-val-test\model_trained\model_47_0.0017480459064245224_UNet_u_net_baseline.pth'
     net.load_state_dict(torch.load(model))
 
     for pkl_pth in os.listdir(path_image_input):
@@ -62,9 +62,9 @@ def synth(path_image_input, path_image_output):
 
 if __name__ == '__main__':
     print('12')
-    path_image_input = r'F:\dataset_pkl\exam_pkl\synth_input_pkl_input'
+    path_image_input = r'F:\U-net-train-val-test\test_pkl_had\synth_input_pkl_input'
     # path_image_input = r'F:\pkl_to_input'  # 自己绘制的
-    path_image_output = r'F:\dataset_pkl\exam_pkl\synth_input_Pkl_output'
+    path_image_output = r'F:\U-net-train-val-test\test_pkl_had\synth_input_Pkl_output'
 
     synth(path_image_input, path_image_output)
 

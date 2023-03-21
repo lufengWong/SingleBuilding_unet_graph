@@ -6,7 +6,7 @@ import shutil
 import time
 
 # import unet_building as unet
-from network_candidates import unet_attention_building_spatialAttention_outline_pooling_blockForm as unet
+from network_candidates import unet_building as unet
 import torch
 from data import WallDataset
 import torch.nn as nn
@@ -164,7 +164,7 @@ class Trainer:
         # 可以使用其他损失，比如DiceLoss、FocalLoss之类的
         self.loss_func = nn.BCELoss()  # 二分类问题
         # 设备好，batch_size和num_workers可以给大点
-        self.loader = DataLoader(WallDataset(data_root=path_train, mask_size=2), batch_size=16, shuffle=True,
+        self.loader = DataLoader(WallDataset(data_root=path_train, mask_size=2), batch_size=8, shuffle=True,
                                  num_workers=4)
         # add
         self.loader_val = DataLoader(WallDataset(data_root=path_val, mask_size=2), batch_size=8, shuffle=True,
@@ -270,7 +270,7 @@ class Trainer:
 
 if __name__ == '__main__':
 
-    name = 'spatialAttention_outline_pooling_blockForm_4Road'  # ##########
+    name = 'u_net_baseline'  # ##########
 
     path_train_files = r"F:\dataset_U-net\train_reinforce"
     path_val_files = r'F:\dataset_U-net\val'
