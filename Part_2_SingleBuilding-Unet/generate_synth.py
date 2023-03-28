@@ -32,14 +32,13 @@ def show_array(array_img, name):
 
 
 
-def synth(path_image_input, path_image_output):
+def synth(model, path_image_input, path_image_output):
 
     # 使用的设备
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # 网络
     net = unet.UNet().to(device)
-    model = r'F:\U-net-train-val-test\model_trained\model_47_0.0017480459064245224_UNet_u_net_baseline.pth'
     net.load_state_dict(torch.load(model))
 
     for pkl_pth in os.listdir(path_image_input):
@@ -62,11 +61,12 @@ def synth(path_image_input, path_image_output):
 
 if __name__ == '__main__':
     print('12')
+    model = r'F:\U-net-train-val-test\model_trained\model_47_0.0017480459064245224_UNet_u_net_baseline.pth'
     path_image_input = r'F:\U-net-train-val-test\test_pkl_had\synth_input_pkl_input'
     # path_image_input = r'F:\pkl_to_input'  # 自己绘制的
     path_image_output = r'F:\U-net-train-val-test\test_pkl_had\synth_input_Pkl_output'
 
-    synth(path_image_input, path_image_output)
+    synth(model, path_image_input, path_image_output)
 
 
 
