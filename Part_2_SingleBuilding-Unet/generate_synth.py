@@ -9,6 +9,7 @@ from torchvision.utils import save_image
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 
+
 def show_array(array_img, name):
     """
     矩阵， 图像
@@ -31,9 +32,7 @@ def show_array(array_img, name):
     plt.title(name)
 
 
-
 def synth(model, path_image_input, path_image_output):
-
     # 使用的设备
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -45,18 +44,24 @@ def synth(model, path_image_input, path_image_output):
         path_pkl = os.path.join(path_image_input, pkl_pth)
         f = open(path_pkl, 'rb')
         tensor_composite = pickle.load(f)
-        tensor_composite = tensor_composite.to(device).view(1,7,256,256)
+        tensor_composite = tensor_composite.to(device).view(1, 7, 256, 256)
         print(tensor_composite.shape)
 
         out = net(tensor_composite)
+        print('shape out')
         print(out.shape)
-        x = (tensor_composite[0,0,:,:] + tensor_composite[0,2,:,:]).view(1,256,256)
-        y_ = out[0][0].view(1,256,256)
-        print(y_)
-        image = torch.stack([x,y_], 0)
+        x = (tensor_composite[0, 0, :, :] + tensor_composite[0, 2, :, :]).view(1, 256, 256)
+        print('shape x')
+        print(x.size())
+        y_ = out[0][0].view(1, 256, 256)
+        print('shape y_')
+        print(y_.size())
+        image = torch.stack([x, y_], 0)
+        print('shape image')
+        print(image.size())
 
         # plt.show()
-        save_image(image.cpu(), os.path.join(path_image_output, f"{pkl_pth.split('.')[0]}.png"))
+        save_image(image.cpu(), os.path.join(path_image_output, f"{pkl_pth.split('.')[0]}.png"), padding=0)
 
 
 if __name__ == '__main__':
@@ -67,8 +72,3 @@ if __name__ == '__main__':
     path_image_output = r'F:\U-net-train-val-test\test_pkl_had\synth_input_Pkl_output'
 
     synth(model, path_image_input, path_image_output)
-
-
-
-
-
