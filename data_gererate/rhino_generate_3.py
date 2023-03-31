@@ -172,7 +172,7 @@ def get_seg_rect_line_list(path_boundary, path_segment, size_grid =192):
 
 if __name__ == "__main__":
     path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
-    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
+    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\1.txt'
     get_seg_rect_line_list(path_boundary_1, path_segment_1, size_grid =1)
 
 

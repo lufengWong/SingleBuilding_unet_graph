@@ -164,7 +164,7 @@ def get_seg_rect_line_list(path_boundary, path_segment):
 
 if __name__ == "__main__":
     path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
-    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
+    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\2.txt'
 
 
     list_outline, list_segment_points, list_rect_points, list_line_points = \
@@ -189,6 +189,10 @@ if __name__ == "__main__":
     srf = rs.AddPlanarSrf(polyline)
 #    rs.AddSurface(srf)
 
+    # 向上拉伸多线段
+    height = 1000  # 拉伸高度
+    extrude_srf = rs.ExtrudeCurveStraight(polyline, (0, 0, 0), (0, 0, height))
+
     # 绘制大分割线 ##########################
     print(list_segment_points)
     for seg in list_segment_points:
@@ -202,11 +206,22 @@ if __name__ == "__main__":
         polyline = rs.AddPolyline(seg)
 
     # # 绘制筒 ##########################
-    # print(list_rect_points)
-    # for seg in list_rect_points:
-    #     # 添加多边形
-    #     polyline = rs.AddPolyline(seg)
-#
+    print(list_rect_points)
+    for seg in list_rect_points:
+        # 添加多边形
+        polyline = rs.AddPolyline(seg)
+        # 闭合多边形
+        rs.CloseCurve(polyline)
+
+        # 向上拉伸多线段
+        height = 3000  # 拉伸高度
+        extrude_srf = rs.ExtrudeCurveStraight(polyline, (0, 0, 0), (0, 0, height))
+        # 获取封闭线段的边界框
+        bbox = rs.BoundingBox(extrude_srf)
+
+        # 添加边界框
+        rs.AddBox(bbox)
+# #
 
 
 

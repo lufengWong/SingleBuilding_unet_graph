@@ -136,7 +136,7 @@ if __name__ == '__main__':
 
     path_image_output = r'F:\U-net-train-val-test\test_pkl_had\synth_input_Pkl_output'
 
-    for png in os.listdir(path_image_output)[0:1]:
+    for png in os.listdir(path_image_output)[0:]:
         path_img = os.path.join(path_image_output, png)
         list_largest_boundary, list_rect, list_lines = from_png_2_polygon(path_img)
         path_txt_all = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points'
