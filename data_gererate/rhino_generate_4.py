@@ -2,16 +2,13 @@
 
 import copy
 #
-#import utils
+# import utils
 
 import rhinoscriptsyntax as rs
 import scriptcontext as sc
 
 
-
 def get_seg_rect_line_list(path_boundary, path_segment):
-
-
     # draw boundary ############################################
 
     # 打开文件
@@ -158,8 +155,8 @@ def get_seg_rect_line_list(path_boundary, path_segment):
     print(list_rect_points)
     print(list_line_points)
 
-
     return list_outline, list_segment_points, list_rect_points, list_line_points
+
 
 def get_mark_loc(path_mark):
     list_marks_all = []
@@ -184,13 +181,14 @@ def get_mark_loc(path_mark):
             line = file.readline()
     return list_marks_all
 
+
 if __name__ == "__main__":
     path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
-    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\2.txt'
-
+    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
+    path_mark_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\mark_0.txt'
 
     list_outline, list_segment_points, list_rect_points, list_line_points = \
-        get_seg_rect_line_list(path_boundary_1, path_segment_1,)
+        get_seg_rect_line_list(path_boundary_1, path_segment_1, )
 
     print(12)
 
@@ -209,7 +207,7 @@ if __name__ == "__main__":
     rs.CloseCurve(polyline)
     # 创建多边形表面并添加到场景中
     srf = rs.AddPlanarSrf(polyline)
-#    rs.AddSurface(srf)
+    #    rs.AddSurface(srf)
 
     # 向上拉伸多线段
     height = 1000  # 拉伸高度
@@ -245,147 +243,23 @@ if __name__ == "__main__":
         rs.AddBox(bbox)
 
     # 悬空字 #####################################
+    list_marks = get_mark_loc(path_mark_1)
+    room_label = [
+        (0, 'Flat'),
+        (1, 'Ladder'),
+        (2, 'Lift'),
+        (3, 'Public'),
 
+        (4, 'External'),
+        (5, 'ExteriorWall'),
+        (6, 'InteriorWall'),
+    ]
+    height = 4000
+    for mark in list_marks:
+        type = room_label[mark[0] // 100][1]
+        point = (mark[2], mark[1], height)
+        height_font = 500
+        font = "Arial"
+        style = 0  # 普通样式
+        rs.AddText(type, point, height_font, font,style)
 
-
-
-
-
-
-# list_boundary.append(list_points)
-#
-#     list_points = []
-# else:
-#     list_points.append(int(line.strip()))
-
-# list_points_all.append(list_points)
-#
-# list_points_all = list_points_all[1:]
-# list_polygon_all = []
-# for points_list in list_points_all:
-#     list_polygon_this = []
-#     point_this = [0, 0, 0]
-#     for index, value in enumerate(points_list):
-#
-#         if index % 2 == 0:
-#             point_this[1] = value
-#         else:
-#             point_this[0] = value
-#             list_polygon_this.append(point_this)
-#             point_this = [0, 0, 0]
-#
-#     list_polygon_all.append(list_polygon_this)
-#
-
-
-# for points in list_polygon_all:
-#
-#     print(points)
-#
-#
-#     polygon = rs.AddPolyline(points)
-#
-#     # 将多边形转换为闭合的曲线
-#     closed_curve = rs.CloseCurve(polygon)
-#
-#     surface_id = rs.AddPlanarSrf(closed_curve)
-
-#    material_index = rs.AddMaterial("Red")
-#    rs.ObjectMaterialIndex(polygon, material_index)
-
-#   # 添加一个材质
-#   material_index = sc.doc.Materials.Add()
-#   sc.doc.Materials[material_index].DiffuseColor = (255, 0, 0)
-#   rs.ObjectMaterialSource(surface_id, 1)
-#   rs.ObjectMaterialIndex(surface_id, material_index)
-
-
-# # draw segment ############################################
-# # 打开文件
-# fileHandler = open (path_segment, "r")
-# # 获取文件中所有行的列表
-# listOfLines = fileHandler.readlines()
-# # 关闭文件
-# fileHandler.close()
-# # 遍历列表中的每一行
-# list_points_all =[]
-# list_points = []
-# for line in listOfLines:
-#     if line.strip() == 'Points':
-#         list_points_all.append(list_points)
-#         list_points = []
-#     else:
-#         list_points.append(int(line.strip()))
-#
-# list_points_all.append(list_points)
-#
-# list_points_all = list_points_all[1:]
-# list_polygon_all = []
-# for points_list in list_points_all:
-#     list_polygon_this = []
-#     point_this = [0, 0, 0]
-#     for index, value in enumerate(points_list):
-#
-#         if index % 2 == 0:
-#             point_this[0] = value * size_grid
-#         else:
-#             point_this[1] = value * size_grid
-#             list_polygon_this.append(point_this)
-#             point_this = [0, 0, 0]
-#
-#     list_polygon_all.append(list_polygon_this)
-#
-# list_points_all_height = []
-# for points in copy.deepcopy(list_polygon_all):
-#     list_points_all_height_this = []
-#     for point in points[::-1]:
-#         point[2] = 3000
-#         list_points_all_height_this.append(point)
-#     list_points_all_height.append(list_points_all_height_this)
-#
-# print('000000000000')
-# list_polygon_all_last = []
-# for list_ground, list_height in zip(list_polygon_all, list_points_all_height):
-#     print('66666666666')
-#     print(list_ground)
-#     print(list_height)
-#     for point in list_height:
-#         print('------')
-#         list_ground.append(point)
-#     list_ground.append(list_ground[0])
-#
-#     print('-----------------')
-#     print(list_ground)
-#     list_polygon_all_last.append(list_ground)
-#
-# print(list_polygon_all_last)
-#
-# for points in list_polygon_all_last:
-#     polygon = rs.AddPolyline(points)
-#
-#     # 将多边形转换为闭合的曲线
-#     closed_curve = rs.CloseCurve(polygon)
-#
-#     surface_id = rs.AddPlanarSrf(closed_curve)
-
-
-# print(points)
-#
-#     polygon = rs.AddPolyline(points)
-#
-#     # 将多边形转换为闭合的曲线
-#     closed_curve = rs.CloseCurve(polygon)
-#
-#     surface_id = rs.AddPlanarSrf(closed_curve)
-#
-# #    # 添加一个材质
-# #    material_index = sc.doc.Materials.Add()
-# #    sc.doc.Materials[material_index].DiffuseColor = (255, 0, 0)
-# #    rs.ObjectMaterialSource(surface_id, 1)
-# #    rs.ObjectMaterialIndex(surface_id, material_index)
-#
-#
-#
-#
-# # 更新场景
-# sc.doc.Views.Redraw()
