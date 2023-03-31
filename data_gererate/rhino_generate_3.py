@@ -17,9 +17,7 @@
 # # 将单位设置为毫米
 # rs.UnitSystem(2)
 
-def get_seg_rect_line_list(path_boundary, path_segment, size_grid =192):
-
-
+def get_seg_rect_line_list(path_boundary, path_segment, size_grid=192):
     # draw boundary ############################################
 
     # 打开文件
@@ -166,17 +164,38 @@ def get_seg_rect_line_list(path_boundary, path_segment, size_grid =192):
     print(list_rect_points)
     print(list_line_points)
 
-
     return list_outline, list_segment_points, list_rect_points, list_line_points
 
 
 if __name__ == "__main__":
     path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
     path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\1.txt'
-    get_seg_rect_line_list(path_boundary_1, path_segment_1, size_grid =1)
+    get_seg_rect_line_list(path_boundary_1, path_segment_1, size_grid=1)
 
+    path_mark = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\mark_2.txt'
 
+    list_marks_all = []
+    with open(path_mark, 'r') as file:
+        line = file.readline()
+        count = -1
+        point = [0, 0, 0]
+        while line:
+            # 处理每一行的数据
+            count += 1
+            print(line.strip())  # 去掉每行末尾的换行符
+            line = line.strip()
+            if count % 3 == 0:
+                point[0] = int(line)
+            elif count % 3 == 1:
+                point[1] = int(line)
+            else:
+                point[2] = int(line)
+                list_marks_all.append(point)
+                point = [0, 0, 0]
 
+            line = file.readline()
+
+    print(list_marks_all)
 
 # list_boundary.append(list_points)
 #

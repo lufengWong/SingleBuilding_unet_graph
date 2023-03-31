@@ -161,6 +161,28 @@ def get_seg_rect_line_list(path_boundary, path_segment):
 
     return list_outline, list_segment_points, list_rect_points, list_line_points
 
+def get_mark_loc(path_mark):
+    list_marks_all = []
+    with open(path_mark, 'r') as file:
+        line = file.readline()
+        count = -1
+        point = [0, 0, 0]
+        while line:
+            # 处理每一行的数据
+            count += 1
+            print(line.strip())  # 去掉每行末尾的换行符
+            line = line.strip()
+            if count % 3 == 0:
+                point[0] = int(line)
+            elif count % 3 == 1:
+                point[1] = int(line)
+            else:
+                point[2] = int(line)
+                list_marks_all.append(point)
+                point = [0, 0, 0]
+
+            line = file.readline()
+    return list_marks_all
 
 if __name__ == "__main__":
     path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
@@ -221,7 +243,8 @@ if __name__ == "__main__":
 
         # 添加边界框
         rs.AddBox(bbox)
-# #
+
+    # 悬空字 #####################################
 
 
 
