@@ -4,8 +4,8 @@ import copy
 #
 #import utils
 
-# import rhinoscriptsyntax as rs
-# import scriptcontext as sc
+import rhinoscriptsyntax as rs
+import scriptcontext as sc
 
 
 
@@ -30,9 +30,9 @@ def get_seg_rect_line_list(path_boundary, path_segment):
         count += 1
         value = int(line.strip())
         if count % 2 == 0:
-            point_this[0] = value
-        else:
             point_this[1] = value
+        else:
+            point_this[0] = value
             list_outline.append(point_this)
             point_this = [0, 0, 0]
 
@@ -105,7 +105,7 @@ def get_seg_rect_line_list(path_boundary, path_segment):
     ####################################
     # boundary - segment
     list_segment_points = []
-    for seg in list_rects:  # 遍历每一个线
+    for seg in list_boundary:  # 遍历每一个线
         list_seg_this = []
         point_this = [0, 0, 0]
         for index, value in enumerate(seg):
@@ -170,45 +170,42 @@ if __name__ == "__main__":
     list_outline, list_segment_points, list_rect_points, list_line_points = \
         get_seg_rect_line_list(path_boundary_1, path_segment_1,)
 
-#     # 获取场景中的所有对象
-#     objects = rs.AllObjects()
-#     # 删除所有对象
-#     rs.DeleteObjects(objects)
-#     # 将单位设置为毫米
-#     rs.UnitSystem(2)
-#
-#     # 绘制边界轮廓 ##########################
-# #     print(list_outline)
-# #     # 添加多边形
-# #     polyline = rs.AddPolyline(list_outline)
-# #     # 闭合多边形
-# #     rs.CloseCurve(polyline)
-# #     # 创建多边形表面并添加到场景中
-# #     srf = rs.AddPlanarSrf(polyline)
-# # #    rs.AddSurface(srf)
-#
-#     # 绘制大分割线 ##########################
-#     print(list_segment_points)
-#     for seg in list_segment_points:
-#         # 添加多边形
-#         polyline = rs.AddPolyline(seg)
-#         # 闭合多边形
-#         # rs.CloseCurve(polyline)
-#         # 创建多边形表面并添加到场景中
-#         # srf = rs.AddPlanarSrf(polyline)
-#     #    rs.AddSurface(srf)
-#     #
-#     # # 绘制小分割线 ##########################
-#     # print(list_line_points)
-#     # for seg in list_line_points:
-#     #     # 添加多边形
-#     #     polyline = rs.AddPolyline(seg)
-#
-#     # # 绘制筒 ##########################
-#     # print(list_rect_points)
-#     # for seg in list_rect_points:
-#     #     # 添加多边形
-#     #     polyline = rs.AddPolyline(seg)
+    print(12)
+
+    # 获取场景中的所有对象
+    objects = rs.AllObjects()
+    # 删除所有对象
+    rs.DeleteObjects(objects)
+    # 将单位设置为毫米
+    rs.UnitSystem(2)
+
+    # 绘制边界轮廓 ##########################
+    print(list_outline)
+    # 添加多边形
+    polyline = rs.AddPolyline(list_outline)
+    # 闭合多边形
+    rs.CloseCurve(polyline)
+    # 创建多边形表面并添加到场景中
+    srf = rs.AddPlanarSrf(polyline)
+#    rs.AddSurface(srf)
+
+    # 绘制大分割线 ##########################
+    print(list_segment_points)
+    for seg in list_segment_points:
+        # 添加多边形
+        polyline = rs.AddPolyline(seg)
+
+    # 绘制小分割线 ##########################
+    print(list_line_points)
+    for seg in list_line_points:
+        # 添加多边形
+        polyline = rs.AddPolyline(seg)
+
+    # # 绘制筒 ##########################
+    # print(list_rect_points)
+    # for seg in list_rect_points:
+    #     # 添加多边形
+    #     polyline = rs.AddPolyline(seg)
 #
 
 
