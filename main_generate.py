@@ -126,8 +126,6 @@ if __name__ == '__main__':
         pkl_file.close()
 
     # 2 神经网络的分割
-
-    path_image_input = r'F:\U-net-train-val-test\test_pkl_had\synth_input_pkl_input'
     path_image_output = os.path.join(path_project, name_files[3])
     generate_synth.synth(model_nn, path_pkl_to_input, path_image_output)
 
@@ -139,6 +137,7 @@ if __name__ == '__main__':
         txt_name = png.split('.')[0]
         find_region.write_gemo_txt(list_largest_boundary, list_rect, list_lines, os.path.join(path_txt_line, txt_name + '.txt'))
 
+    # rhino
 
 
 
