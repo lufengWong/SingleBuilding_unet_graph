@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import copy
+import os
+
 #
 # import utils
 
@@ -183,14 +185,25 @@ def get_mark_loc(path_mark):
 
 
 if __name__ == "__main__":
-    path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
-    path_segment_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
-    path_mark_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\mark_0.txt'
+    path_data_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Data_temp'
+    name_project = '12'
+    ID_layout = 0
+
+    # 文件地址
+    path_data_save = os.path.join(path_data_save, name_project)
+    path_boundary_1 = os.path.join(os.path.join(path_data_save, 'Boundary'), 'boundary.txt')
+    path_mark_1 = os.path.join(os.path.join(path_data_save, 'Marks_txt'), 'mark_'+str(ID_layout)+'.txt')
+    path_segLine_1 = os.path.join(os.path.join(path_data_save, 'Lines'), str(ID_layout)+'.txt')
+
+
+    # # path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
+    # path_segLine_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
+    # path_mark_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\mark_0.txt'
 
     list_outline, list_segment_points, list_rect_points, list_line_points = \
-        get_seg_rect_line_list(path_boundary_1, path_segment_1, )
+        get_seg_rect_line_list(path_boundary_1, path_segLine_1 )
 
-    print(12)
+    # print(12)
 
     # 获取场景中的所有对象
     objects = rs.AllObjects()
