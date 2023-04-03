@@ -196,10 +196,6 @@ if __name__ == "__main__":
     path_segLine_1 = os.path.join(os.path.join(path_data_save, 'Lines'), str(ID_layout)+'.txt')
 
 
-    # # path_boundary_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\data_gererate\boundary.txt'
-    # path_segLine_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\0.txt'
-    # path_mark_1 = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points\mark_0.txt'
-
     list_outline, list_segment_points, list_rect_points, list_line_points = \
         get_seg_rect_line_list(path_boundary_1, path_segLine_1 )
 
