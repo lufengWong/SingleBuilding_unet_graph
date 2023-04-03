@@ -2,7 +2,7 @@ import os
 import pickle
 
 import numpy as np
-from network_candidates import unet_building as unet
+from network_candidates import unet_attention_building_spatialAttention_outline_pooling_blockForm as unet
 import torch
 
 from torchvision.utils import save_image
