@@ -925,17 +925,29 @@ def make_piex(dir_dxf, name_dxf, dir_png, dir_graph, new_name):
 
 if __name__ == '__main__':
 
-    dxf_file = r'F:\data_zjkj\CAD_layout'
+    # dxf_file = r'F:\data_zjkj\CAD_layout'
+    #
+    # png_file_zjkj = r'F:\data_zjkj\dataset_png_zjkj'
+    # graph_file_zjkj = r'F:\data_zjkj\dataset_graph_zjkj'
+    #
+    # png_file_other = r'F:\data_zjkj\dataset_png_other'
+    # graph_file_other = r'F:\data_zjkj\dataset_graph_other'
+    #
+    # txt_log_failed = r'F:\data_zjkj\log_make'
+    #
+    # count_debut = 1011
 
-    png_file_zjkj = r'F:\data_zjkj\dataset_png_zjkj'
-    graph_file_zjkj = r'F:\data_zjkj\dataset_graph_zjkj'
+    dxf_file = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example'
 
-    png_file_other = r'F:\data_zjkj\dataset_png_other'
-    graph_file_other = r'F:\data_zjkj\dataset_graph_other'
+    png_file_zjkj = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_png_zjkj'
+    graph_file_zjkj = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_graph_zjkj'
 
-    txt_log_failed = r'F:\data_zjkj\log_make'
+    png_file_other = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_png_other'
+    graph_file_other = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_graph_other'
 
-    count_debut = 1011
+    txt_log_failed = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\log_make'
+
+    count_debut = 0
 
     if not count_debut:
         if os.path.exists(png_file_zjkj):
@@ -973,7 +985,7 @@ if __name__ == '__main__':
             list_file_address_name.append(os.path.split(file_may))
 
     # list_dxf_names = [name for name in os.listdir(dxf_file) if name.split('.')[-1] == 'dxf']
-    #######
+    # ######
 
     count_all = 0
     print(f'Number of dataset: {len(list_file_address_name)}')
