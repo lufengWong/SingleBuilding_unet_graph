@@ -14,7 +14,7 @@ import matplotlib.patches as mpatches
 import numpy as np
 import cv2
 
-
+import networkx as nx
 
 
 def draw_graph(g_true):
@@ -34,7 +34,7 @@ def draw_graph(g_true):
     for k, label in enumerate(g_true[0]):
         _type = label + 1
         if _type >= 0:
-            G_true.add_nodes_from([(k, {'label': k+1})])
+            G_true.add_nodes_from([(k, {'label': k + 1})])
             colors_H.append(ID_COLOR[_type])
             node_size.append(1000)
             edgecolors.append('blue')
@@ -43,7 +43,7 @@ def draw_graph(g_true):
     for k, m, l in g_true[1]:
         _type_k = g_true[0][k] + 1
         _type_l = g_true[0][l] + 1
-        if m > 0 :
+        if m > 0:
             G_true.add_edges_from([(k, l)])
             edge_color.append('#D3A2C7')
 
@@ -54,7 +54,7 @@ def draw_graph(g_true):
     #     print(G_true.nodes())
     #     print(g_true[0])
     #     print(len(edgecolors))
-    #画图
+    # 画图
     plt.figure()
     pos = nx.nx_agraph.graphviz_layout(G_true, prog='neato')
     nx.draw(G_true, pos, node_size=node_size, linewidths=linewidths, node_color=colors_H, font_size=14,
@@ -68,6 +68,7 @@ def draw_graph(g_true):
     # rgb_im = Image.open('../dump/_true_graph.jpg')
     # return G_true, rgb_im
 
+
 def show_array(array_img, name):
     """
     矩阵， 图像
@@ -75,7 +76,8 @@ def show_array(array_img, name):
     :param name:
     :return:
     """
-    im = plt.imshow(array_img, cmap='Pastel1')
+    # im = plt.imshow(array_img, cmap='Pastel1')
+    im = plt.imshow(array_img, cmap='rainbow')
     values = np.unique(array_img.ravel())
     # get the colors of the values, according to the
     # colormap used by imshow
@@ -84,21 +86,40 @@ def show_array(array_img, name):
     patches = [mpatches.Patch(color=colors[i], label="Mask {l}".format(l=int(values[i])))
                for i in range(len(values))]
     # put those patched as legend-handles into the legend
-    plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=7)  # 24
+    plt.legend(handles=patches, bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0., fontsize=25)  # 24
 
     # plt.grid(True)
-    plt.title(name, fontsize=10)  # 20
+    plt.title(name, font={'family': 'Arial', 'size': 40})  # 20
 
 
-if __name__ == '__mian__':
+if __name__ == '__main__':
     print('12')
 
-    path_img = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\11_1_1.png'
-    # path_graph = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_graph_zjkj\1_1_1.npy'
+    path_img = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\1_1_1.png'
+    path_graph = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_graph_zjkj\1_1_1.npy'
 
-    img = cv2.imread(path_img)
-    print(img)
-    # img = img.load()
+    # img = np.array(Image.open(path_img))
     # print(img)
-    # show_array(img[:,:,0], '1')
+    # show_array(img[:, :, 3], 'Channel 4 : Inside mask')
     # plt.show()
+
+    graph_tuple = np.load(path_graph, allow_pickle=True)
+    print(graph_tuple)
+    # draw_graph(path_graph)
+    #
+    # import networkx as nx
+    # import matplotlib.pyplot as plt
+    #
+    G = nx.Graph()
+    # data = [[101, 101], [101, 301], [101, 6], [201, 201], [201, 301], [201, 2], [301, 101], [301, 201], [301, 301],
+    #         [301, 1], [301, 2], [301, 3], [301, 4], [301, 5], [301, 6], [1, 301], [1, 1], [1, 2], [2, 201], [2, 301],
+    #         [2, 1], [2, 2], [3, 301], [3, 3], [3, 4], [4, 301], [4, 3], [4, 4], [5, 301], [5, 5], [5, 6], [6, 101],
+    #         [6, 301], [6, 5], [6, 6]]
+    #
+    data = [one for one in graph_tuple if one[0] != one[1] ]
+    G.add_edges_from(data)
+    pos = nx.spring_layout(G)  # 可以选择其他布局算法
+    nx.draw_networkx(G,pos,node_size=1000,node_color='dodgerblue', font_size = 16)
+    plt.grid()
+    plt.title('Graph')
+    plt.show()
