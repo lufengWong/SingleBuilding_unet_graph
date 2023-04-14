@@ -43,7 +43,7 @@ if __name__ == '__main__':
     model_nn = r'F:\U-net-train-val-test\model_trained\model_30_0.0011151954531669617_UNet_spatialAttention_outline_pooling_blockForm_4Road.pth'
 
     # 输入参数
-    points_ploygon_input_1 = [[10000, 0], [30000, 0], [30000, 20000], [0, 20000], [0, 10000], [10000, 10000]]
+    points_ploygon_input_1 = [[0, 5000], [10000, 5000], [10000, 0], [30000, 0], [30000, 20000], [0, 30000]]
     apartments_need_1 = {100: 2, 80: 2, 65: 1}
     num_elevators_1 = 3
 

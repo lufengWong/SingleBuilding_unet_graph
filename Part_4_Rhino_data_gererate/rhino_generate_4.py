@@ -187,7 +187,7 @@ def get_mark_loc(path_mark):
 if __name__ == "__main__":
     path_data_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Data_temp'
     name_project = '12'
-    ID_layout = 0
+    ID_layout = 2
 
     # 文件地址
     path_data_save = os.path.join(path_data_save, name_project)
@@ -256,7 +256,7 @@ if __name__ == "__main__":
     room_label = [
         (0, 'Flat'),
         (1, 'Ladder'),
-        (2, 'Lift'),
+        (2, 'Elevator'),
         (3, 'Public'),
 
         (4, 'External'),
@@ -267,7 +267,7 @@ if __name__ == "__main__":
     for mark in list_marks:
         type = room_label[mark[0] // 100][1]
         point = (mark[2], mark[1], height)
-        height_font = 500
+        height_font = 800
         font = "Arial"
         style = 0  # 普通样式
         rs.AddText(type, point, height_font, font,style)

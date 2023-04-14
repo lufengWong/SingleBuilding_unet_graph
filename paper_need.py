@@ -116,10 +116,10 @@ if __name__ == '__main__':
     #         [2, 1], [2, 2], [3, 301], [3, 3], [3, 4], [4, 301], [4, 3], [4, 4], [5, 301], [5, 5], [5, 6], [6, 101],
     #         [6, 301], [6, 5], [6, 6]]
     #
-    data = [one for one in graph_tuple if one[0] != one[1] ]
+    data = [one for one in graph_tuple if one[0] != one[1]]
     G.add_edges_from(data)
     pos = nx.spring_layout(G)  # 可以选择其他布局算法
-    nx.draw_networkx(G,pos,node_size=1000,node_color='dodgerblue', font_size = 16)
+    nx.draw_networkx(G, pos, node_size=1000, node_color='dodgerblue', font_size=16)
     plt.grid()
     plt.title('Graph')
     plt.show()

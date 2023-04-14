@@ -31,19 +31,20 @@ def from_png_2_polygon(path_png):
     rct, array_wall = cv2.threshold(array_wall, 100, 1, cv2.THRESH_BINARY)
     plt.imshow(array_wall)
     # plt.title('Wall-value-2')
-    # plt.show()
+    plt.show()
 
     kernel_dilate = np.ones((3, 3), np.uint8)
     array_wall = cv2.dilate(array_wall, kernel_dilate, iterations=2)
     plt.imshow(array_wall)
     # plt.title('Wall-dilate')
-    # plt.show()
+    plt.show()
 
     kernel_erode = np.ones((3, 3), np.uint8)
     array_wall = cv2.erode(array_wall, kernel_erode, iterations=2)
+    array_wall_2 = cv2.erode(array_wall, kernel_erode, iterations=2)
     plt.imshow(array_wall)
     # plt.title('Wall-erode')
-    # plt.show()
+    plt.show()
 
     skeleton = morphology.skeletonize(array_wall)
     plt.imshow(skeleton)
@@ -55,8 +56,19 @@ def from_png_2_polygon(path_png):
     array_wall = array_wall.astype(np.uint8)
 
     contours, hierarchy = cv2.findContours(array_wall, cv2.RETR_CCOMP, cv2.CHAIN_APPROX_SIMPLE)
-    print(hierarchy)
-    print(hierarchy.shape)
+
+    for line_polygon in contours:
+        lines = line_polygon.reshape(-1,2)
+        plt.plot(lines[:,0], 256*2 - lines[:,1] -256)
+
+    plt.xlim(0, 256)
+    plt.ylim(0, 256)
+
+    ax = plt.gca()
+    ax.set_aspect(1)
+    # plt.axis('equal')
+    plt.show()
+
 
     list_largest_boundary = []
     list_rect = []
@@ -139,6 +151,6 @@ if __name__ == '__main__':
     for png in os.listdir(path_image_output)[0:]:
         path_img = os.path.join(path_image_output, png)
         list_largest_boundary, list_rect, list_lines = from_png_2_polygon(path_img)
-        path_txt_all = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_3_SingleBuilding_findCounter\txt_region_points'
+        path_txt_all = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Data_temp\txt_temp'
         txt_name = png.split('.')[0]
         write_gemo_txt(list_largest_boundary, list_rect, list_lines, os.path.join(path_txt_all, txt_name + '.txt'))

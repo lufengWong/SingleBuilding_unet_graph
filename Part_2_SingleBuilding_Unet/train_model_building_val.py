@@ -92,7 +92,7 @@ def val(model, dataloader, file):
             metric.addBatch(predict_int, target_int)
             pa += metric.pixelAccuracy()
             # cpa += metric.classPixelAccuracy()
-            mpa += metric.meanPixelAccuracy()
+            mpa += metric.meanPixelAccuracy()  ######################
             mIoU += metric.meanIntersectionOverUnion()
 
             num_predict = np.sum(predict_int == target_int)  # 像素点对的个数
