@@ -66,6 +66,8 @@ def val(model, dataloader, file):
         loss_func = nn.BCELoss().to('cuda')
         loss_bce = loss_func(output, target)
 
+        log(file, f'loss_train: {loss_bce}')
+
         output = output.cpu().numpy()
         target = target.cpu().numpy()
         # predict = np.argmax(output, axis=1)
@@ -270,12 +272,12 @@ class Trainer:
 
 if __name__ == '__main__':
 
-    name = 'u_net_baseline'  # ##########
+    name = 'u_net_baseline_train_loss'  # ##########
 
     path_train_files = r"F:\dataset_U-net\train_reinforce"
     path_val_files = r'F:\dataset_U-net\val'
     path_net_save = r'F:\U-net-train-val-test\model_trained'
-    path_log_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_2_SingleBuilding-Unet\log'
+    path_log_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_2_SingleBuilding_Unet\log'
 
     path_img_save = os.path.join(r'F:\U-net-train-val-test\val_img_generated', name)
 

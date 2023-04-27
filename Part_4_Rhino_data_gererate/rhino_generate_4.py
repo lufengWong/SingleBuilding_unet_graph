@@ -185,9 +185,19 @@ def get_mark_loc(path_mark):
 
 
 if __name__ == "__main__":
+    
+    # path inout
     path_data_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Data_temp'
-    name_project = '12'
-    ID_layout = 2
+    name_project = 'untypical-3'
+    ID_layout = 1
+    
+    # path save
+    path_save=r'C:\Users\Administrator\Desktop\rhino-moedl'
+    name_save= name_project+'-'+str(ID_layout+1)+'.3dm'
+    path_save= os.path.join(path_save, name_save)
+    
+    rs.Command('_SaveAs '+path_save+ " _Enter")
+    
 
     # 文件地址
     path_data_save = os.path.join(path_data_save, name_project)
@@ -225,13 +235,28 @@ if __name__ == "__main__":
     # 绘制大分割线 ##########################
     print(list_segment_points)
     for seg in list_segment_points:
+        if len(seg)>100:
+            slice = len(seg)//2
+            seg= seg[::2]
+        elif len(seg) == 1:
+            continue
         # 添加多边形
         polyline = rs.AddPolyline(seg)
 
     # 绘制小分割线 ##########################
     print(list_line_points)
+   
     for seg in list_line_points:
+        print('999999999999999')
+        print(seg)
         # 添加多边形
+        if len(seg)>100:
+            slice = len(seg)//2
+            seg= seg[::2]
+        elif len(seg) == 1:
+            continue
+        print('1111111111')
+        print(seg)
         polyline = rs.AddPolyline(seg)
 
     # # 绘制筒 ##########################
@@ -255,8 +280,8 @@ if __name__ == "__main__":
     list_marks = get_mark_loc(path_mark_1)
     room_label = [
         (0, 'Flat'),
-        (1, 'Ladder'),
-        (2, 'Elevator'),
+        (1, 'Elevator'),
+        (2, 'Ladder'),
         (3, 'Public'),
 
         (4, 'External'),
@@ -271,4 +296,12 @@ if __name__ == "__main__":
         font = "Arial"
         style = 0  # 普通样式
         rs.AddText(type, point, height_font, font,style)
+        
+#    print(path_save)
+
+    
+    
+    print('Save sucessfully')
+    
+
 

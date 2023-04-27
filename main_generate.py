@@ -42,15 +42,15 @@ if __name__ == '__main__':
                           r'F:\Dataset_zjkj_4_channel_graph\building_piex_20230221\dataset_graph_other']
 
     # 神经网络
-    model_nn = r'F:\U-net-train-val-test\model_trained\model_30_0.0011151954531669617_UNet_spatialAttention_outline_pooling_blockForm_4Road.pth'
+    model_nn = r'F:\U-net-train-val-test\model_trained\model_47_0.0017480459064245224_UNet_u_net_baseline.pth'
 
     # 输入参数
     # points_ploygon_input_1 = [[0, 5000], [10000, 5000], [10000, 0], [30000, 0], [30000, 20000], [0, 30000]]
 
-    # name_project = 'typical-1'
-    # points_ploygon_input_1 = [[0, 0], [22000, 0], [22000, 14000], [0, 14000],]
-    # apartments_need_1 = {110: 2}
-    # num_elevators_1 = 2
+    name_project = 'typical-1'
+    points_ploygon_input_1 = [[0, 0], [22000, 0], [22000, 14000], [0, 14000],]
+    apartments_need_1 = {110: 2}
+    num_elevators_1 = 2
 
     #
     # name_project = 'typical-2'
@@ -69,22 +69,22 @@ if __name__ == '__main__':
     # apartments_need_1 = {120: 2, }
     # num_elevators_1 = 2
 
-    name_project = 'untypical-2'
-    width=10000
-    length=20000
-    points_ploygon_input_1 = [[length/2,0],[length/2, width],[-length/2, width],[-length/2,0],
-                              [0,0],
-                              [0,-width],[length,-width],[length,0],[length/2,0]]
-
-    points_ploygon_input_1 = np.array(points_ploygon_input_1).reshape(-1, 2) \
-                             - np.array([[length/4, 0]])\
-                             + np.array([[256 / 2 * utils.size_grid, 256 / 2 * utils.size_grid]])
-
-    plt.plot(np.array(points_ploygon_input_1).reshape(-1, 2)[:, 0],
-             np.array(points_ploygon_input_1).reshape(-1, 2)[:, 1])
-    plt.show()
-    apartments_need_1 = {100: 2}
-    num_elevators_1 = 2
+    # name_project = 'untypical-2'
+    # width=10000
+    # length=20000
+    # points_ploygon_input_1 = [[length/2,0],[length/2, width],[-length/2, width],[-length/2,0],
+    #                           [0,0],
+    #                           [0,-width],[length,-width],[length,0],[length/2,0]]
+    #
+    # points_ploygon_input_1 = np.array(points_ploygon_input_1).reshape(-1, 2) \
+    #                          - np.array([[length/4, 0]])\
+    #                          + np.array([[256 / 2 * utils.size_grid, 256 / 2 * utils.size_grid]])
+    #
+    # plt.plot(np.array(points_ploygon_input_1).reshape(-1, 2)[:, 0],
+    #          np.array(points_ploygon_input_1).reshape(-1, 2)[:, 1])
+    # plt.show()
+    # apartments_need_1 = {100: 2}
+    # num_elevators_1 = 2
 
     # name_project = 'untypical-3'
     # height = 16000
