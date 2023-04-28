@@ -7,6 +7,7 @@ import time
 
 # import unet_building as unet
 from network_candidates import unet_building as unet
+# from network_candidates import unet_attention_building_spatialAttention_outline_pooling_blockForm as unet
 import torch
 from data import WallDataset
 import torch.nn as nn
@@ -65,8 +66,6 @@ def val(model, dataloader, file):
 
         loss_func = nn.BCELoss().to('cuda')
         loss_bce = loss_func(output, target)
-
-        log(file, f'loss_train: {loss_bce}')
 
         output = output.cpu().numpy()
         target = target.cpu().numpy()
@@ -218,6 +217,7 @@ class Trainer:
 
                 loss = loss_bce
 
+
                 # 后向
                 self.opt.zero_grad()
                 loss.backward()
@@ -233,7 +233,11 @@ class Trainer:
                 img = torch.stack([x, x_, y], 0)
                 save_image(img.cpu(), os.path.join(self.img_save_path, f"{epoch}.png"))  # 存下了此batch的最后一张
                 # print("image save successfully !")
+
             print(f"\nEpoch: {epoch}/{stop_value}, Train Loss: {loss}")
+
+            log(log_file, f'loss_train: {loss}')
+
             # torch.save(self.net.state_dict(), self.model)
             # print("model is saved !")
 
@@ -257,7 +261,7 @@ class Trainer:
                         print("model_copy is saved !")
                         overFit = True
             # 备份
-            if epoch % 15 == 0:
+            if epoch % 5 == 0:
                 torch.save(self.net.state_dict(), self.model_copy.format(epoch, loss))
                 # torch.save(self.net, 'model_all.h5')  # 保存整个网络
                 print("model_copy is saved !")
@@ -272,7 +276,7 @@ class Trainer:
 
 if __name__ == '__main__':
 
-    name = 'u_net_baseline_train_loss'  # ##########
+    name = 'u_net_baseline_train_loss_2'  # ##########
 
     path_train_files = r"F:\dataset_U-net\train_reinforce"
     path_val_files = r'F:\dataset_U-net\val'

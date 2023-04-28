@@ -7,7 +7,7 @@
 
 import matplotlib.pyplot as plt
 
-file_path_unet = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\paper_need\log_u_net_baseline.txt'
+file_path_unet = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_2_SingleBuilding_Unet\log\log_u_net_baseline_train_loss.txt'
 list_loss_unet = []
 with open(file_path_unet, 'r') as file:
     line = file.readline()
@@ -21,7 +21,7 @@ with open(file_path_unet, 'r') as file:
             list_loss_unet.append(float(value))
 
 
-file_path_unet_sa = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\paper_need\log_spatialAttention_outline_pooling_blockForm_3Road.txt'
+file_path_unet_sa = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Part_2_SingleBuilding_Unet\log\log_u_net_block_train_loss.txt'
 list_loss_unet_sa = []
 with open(file_path_unet_sa, 'r') as file:
     line = file.readline()
@@ -36,8 +36,10 @@ with open(file_path_unet_sa, 'r') as file:
 
 plt.plot(list(range(0, len(list_loss_unet))), list_loss_unet,'blue', label='U-Net')
 plt.plot(list(range(0, len(list_loss_unet_sa))), list_loss_unet_sa, 'r', label = 'ICSA-UNet')
-plt.xlabel('Epoch', weight='bold')
-plt.ylabel('Loss', weight='bold')
-plt.title('Validate Loss', fontsize=12)
+# plt.xlabel('Epoch', weight='bold')
+# plt.ylabel('Loss', weight='bold')
+plt.xlabel('Epoch',)
+plt.ylabel('Loss', )
+plt.title('Validate Loss', fontsize=12, fontweight='bold')
 plt.legend()
 plt.show()

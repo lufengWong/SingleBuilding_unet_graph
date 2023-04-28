@@ -42,15 +42,15 @@ if __name__ == '__main__':
                           r'F:\Dataset_zjkj_4_channel_graph\building_piex_20230221\dataset_graph_other']
 
     # 神经网络
-    model_nn = r'F:\U-net-train-val-test\model_trained\model_47_0.0017480459064245224_UNet_u_net_baseline.pth'
+    model_nn = r'F:\U-net-train-val-test\model_trained\model_5_0.010342932306230068_UNet_u_net_block_train_loss.pth'
 
     # 输入参数
     # points_ploygon_input_1 = [[0, 5000], [10000, 5000], [10000, 0], [30000, 0], [30000, 20000], [0, 30000]]
 
-    name_project = 'typical-1'
-    points_ploygon_input_1 = [[0, 0], [22000, 0], [22000, 14000], [0, 14000],]
-    apartments_need_1 = {110: 2}
-    num_elevators_1 = 2
+    # name_project = 'typical-1'
+    # points_ploygon_input_1 = [[0, 0], [22000, 0], [22000, 14000], [0, 14000],]
+    # apartments_need_1 = {110: 2}
+    # num_elevators_1 = 2
 
     #
     # name_project = 'typical-2'
@@ -59,10 +59,10 @@ if __name__ == '__main__':
     # num_elevators_1 = 2
     #
     #
-    # name_project = 'typical-3'
-    # points_ploygon_input_1 = [[0, 0], [38000, 0], [38000, 20000], [0, 20000], ]
-    # apartments_need_1 = {100: 2, 60: 4}
-    # num_elevators_1 = 2
+    name_project = 'typical-3'
+    points_ploygon_input_1 = [[0, 0], [38000, 0], [38000, 20000], [0, 20000], ]
+    apartments_need_1 = {100: 2, 60: 4}
+    num_elevators_1 = 2
 
     # name_project = 'untypical-1'
     # points_ploygon_input_1 = [[0, 0], [28000, 0], [28000, 8000], [18000, 8000],[18000, 14000],[10000, 14000],[10000, 8000], [0,8000] ]
