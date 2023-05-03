@@ -35,7 +35,7 @@ with open(file_path_unet_sa, 'r') as file:
             list_loss_unet_sa.append(float(value))
 
 plt.plot(list(range(0, len(list_loss_unet))), list_loss_unet,'blue', label='U-Net')
-plt.plot(list(range(0, len(list_loss_unet_sa))), list_loss_unet_sa, 'r', label = 'ICSA-UNet')
+plt.plot(list(range(0, len(list_loss_unet_sa))), list_loss_unet_sa, 'orange', label = 'ICSA-UNet')
 # plt.xlabel('Epoch', weight='bold')
 # plt.ylabel('Loss', weight='bold')
 plt.xlabel('Epoch',)

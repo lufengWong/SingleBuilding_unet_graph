@@ -188,7 +188,7 @@ if __name__ == "__main__":
     
     # path inout
     path_data_save = r'C:\Users\Administrator\Desktop\singleBuilding_unet_graph\Data_temp'
-    name_project = 'untypical-3'
+    name_project = 'typical-2'
     ID_layout = 1
     
     # path save
