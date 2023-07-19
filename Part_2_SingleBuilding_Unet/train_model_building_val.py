@@ -6,8 +6,9 @@ import shutil
 import time
 
 # import unet_building as unet
-from network_candidates import unet_building as unet
+# from network_candidates import unet_building as unet
 # from network_candidates import unet_attention_building_spatialAttention_outline_pooling_blockForm as unet
+from network_candidates import unet_attention_building as unet
 import torch
 from data import WallDataset
 import torch.nn as nn
@@ -250,7 +251,7 @@ class Trainer:
                 loss_val = val(self.net, self.loader_val, log_file)[6]
                 list_loss.append(loss_val)
 
-                num_tolerance = 15  # 多少代没有变化就停止，防止过拟合
+                num_tolerance = 250 # 15  # 多少代没有变化就停止，防止过拟合
                 if len(list_loss) >= num_tolerance + 2:
                     min_now = min(list_loss[-num_tolerance:])
                     min_before = min(list_loss[:-num_tolerance])
@@ -261,7 +262,7 @@ class Trainer:
                         print("model_copy is saved !")
                         overFit = True
             # 备份
-            if epoch % 5 == 0:
+            if epoch % 1 == 0:
                 torch.save(self.net.state_dict(), self.model_copy.format(epoch, loss))
                 # torch.save(self.net, 'model_all.h5')  # 保存整个网络
                 print("model_copy is saved !")
@@ -275,8 +276,9 @@ class Trainer:
 
 
 if __name__ == '__main__':
-
-    name = 'u_net_baseline_train_loss_2'  # ##########
+    time_now = time.time()
+    name = 'u_net_att_train_loss_66_150_2_' + str(time_now)
+    # name = 'u_net_baseline_train_loss_66_1'  # ##########
 
     path_train_files = r"F:\dataset_U-net\train_reinforce"
     path_val_files = r'F:\dataset_U-net\val'
@@ -296,4 +298,10 @@ if __name__ == '__main__':
                 img_save_path=path_img_save,
                 log_file=os.path.join(path_log_save, 'log_' + name + '.txt'))
 
-    t.train(200)
+    t.train(150)
+
+
+
+
+
+

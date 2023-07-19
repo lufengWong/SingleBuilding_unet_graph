@@ -42,7 +42,8 @@ if __name__ == '__main__':
                           r'F:\Dataset_zjkj_4_channel_graph\building_piex_20230221\dataset_graph_other']
 
     # 神经网络
-    model_nn = r'F:\U-net-train-val-test\model_trained\model_5_0.010342932306230068_UNet_u_net_block_train_loss.pth'
+    # model_nn = r'F:\U-net-train-val-test\model_trained\model_5_0.010342932306230068_UNet_u_net_block_train_loss.pth'
+    model_nn = r'F:\U-net-train-val-test\model_trained\model_15_0.0011388693237677217_UNet_u_net_att_train_loss_66_150_1686207992.2917483.pth'
 
     # 输入参数
     # points_ploygon_input_1 = [[0, 5000], [10000, 5000], [10000, 0], [30000, 0], [30000, 20000], [0, 30000]]
@@ -57,12 +58,12 @@ if __name__ == '__main__':
     # points_ploygon_input_1 = [[0, 0], [34000, 0], [34000, 16000], [0, 16000], ]
     # apartments_need_1 = {90: 2, 80:2}
     # num_elevators_1 = 2
+    # #
     #
-    #
-    name_project = 'typical-3'
-    points_ploygon_input_1 = [[0, 0], [38000, 0], [38000, 20000], [0, 20000], ]
-    apartments_need_1 = {100: 2, 60: 4}
-    num_elevators_1 = 2
+    # name_project = 'typical-3'
+    # points_ploygon_input_1 = [[0, 0], [38000, 0], [38000, 20000], [0, 20000], ]
+    # apartments_need_1 = {100: 2, 60: 4}
+    # num_elevators_1 = 2
 
     # name_project = 'untypical-1'
     # points_ploygon_input_1 = [[0, 0], [28000, 0], [28000, 8000], [18000, 8000],[18000, 14000],[10000, 14000],[10000, 8000], [0,8000] ]
@@ -86,30 +87,30 @@ if __name__ == '__main__':
     # apartments_need_1 = {100: 2}
     # num_elevators_1 = 2
 
-    # name_project = 'untypical-3'
-    # height = 16000
-    # width = 10000
-    # points_ploygon_input_1 = [[width / 2 + height, 0], [width / 2 + height, width / 2], [width / 2, width / 2],
-    #                           [width / 2, width / 2 + height],
-    #
-    #                           [-width / 2, width / 2 + height], [-width / 2, width / 2],
-    #                           [-width / 2 - height, width / 2], [-width / 2 - height, 0],
-    #
-    #                           [-width / 2 - height, -width / 2], [-width / 2, -width / 2],
-    #                           [-width / 2, -width / 2 - height], [0, -width / 2 - height],
-    #
-    #                           [width / 2, -width / 2 - height], [width / 2, -width / 2, ],
-    #                           [width / 2 + height, -width / 2], [width / 2 + height, 0]
-    #                           ]
-    # # plt.Polygon(points_ploygon_input_1)
-    # points_ploygon_input_1 = np.array(points_ploygon_input_1).reshape(-1, 2) + np.array(
-    #     [[256 / 2 * utils.size_grid, 256 / 2 * utils.size_grid]])
-    # plt.plot(np.array(points_ploygon_input_1).reshape(-1, 2)[:, 0],
-    #          np.array(points_ploygon_input_1).reshape(-1, 2)[:, 1])
-    # plt.show()
-    #
-    # apartments_need_1 = {120: 4, }
-    # num_elevators_1 = 2
+    name_project = 'untypical-3'
+    height = 16000
+    width = 10000
+    points_ploygon_input_1 = [[width / 2 + height, 0], [width / 2 + height, width / 2], [width / 2, width / 2],
+                              [width / 2, width / 2 + height],
+
+                              [-width / 2, width / 2 + height], [-width / 2, width / 2],
+                              [-width / 2 - height, width / 2], [-width / 2 - height, 0],
+
+                              [-width / 2 - height, -width / 2], [-width / 2, -width / 2],
+                              [-width / 2, -width / 2 - height], [0, -width / 2 - height],
+
+                              [width / 2, -width / 2 - height], [width / 2, -width / 2, ],
+                              [width / 2 + height, -width / 2], [width / 2 + height, 0]
+                              ]
+    # plt.Polygon(points_ploygon_input_1)
+    points_ploygon_input_1 = np.array(points_ploygon_input_1).reshape(-1, 2) + np.array(
+        [[256 / 2 * utils.size_grid, 256 / 2 * utils.size_grid]])
+    plt.plot(np.array(points_ploygon_input_1).reshape(-1, 2)[:, 0],
+             np.array(points_ploygon_input_1).reshape(-1, 2)[:, 1])
+    plt.show()
+
+    apartments_need_1 = {120: 4, }
+    num_elevators_1 = 2
 
     # # 项目名称
     # name_project = '110_2_el_2'

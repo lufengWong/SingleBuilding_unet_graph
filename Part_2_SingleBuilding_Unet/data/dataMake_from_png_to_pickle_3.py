@@ -170,7 +170,6 @@ def write2pickle_single(train_dir, pkl_dir, name, count_num):
                 else:
                     index_category.append((index, category))
 
-
     for (index, category) in index_category:  # 遍历所有的实例分割后的标记号码以及对应的分类
         node = {}  # 可以有很多node
         node['category'] = int(category)  # 不同node的category可以相同
@@ -223,19 +222,19 @@ def mask_rectangle_Cut_out(size_pic, mask_width_ratio=0.5, mask_height_ratio=0.5
 
     size_pic = size_pic - 1
 
-    mask_width = math.ceil(size_pic * mask_width_ratio) # 取大
+    mask_width = math.ceil(size_pic * mask_width_ratio)  # 取大
     mask_height = math.ceil(size_pic * mask_height_ratio)
 
     width_available = size_pic - mask_width
     height_available = size_pic - mask_height
 
     # 开始的位置
-    point_width_index_start = math.ceil(random.uniform(0, 0.99) * width_available) # 取小
+    point_width_index_start = math.ceil(random.uniform(0, 0.99) * width_available)  # 取小
     point_height_index_start = math.ceil(random.uniform(0, 0.99) * height_available)
 
     points_mask = [[x, y]
-                   for x in range(point_width_index_start, point_width_index_start + mask_width-1)
-                   for y in range(point_height_index_start, point_height_index_start + mask_height-1)]
+                   for x in range(point_width_index_start, point_width_index_start + mask_width - 1)
+                   for y in range(point_height_index_start, point_height_index_start + mask_height - 1)]
 
     judge = np.all(np.less(np.array(points_mask), 256))
 
@@ -272,7 +271,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
         :param name:
         :return:
         """
-    print(count_num// (4+1), count_num % (4+1))
+    print(count_num // (4 + 1), count_num % (4 + 1))
 
     path = os.path.join(train_dir, name)
 
@@ -332,7 +331,6 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
                     else:
                         index_category.append((index, category))
 
-
         for (index, category) in index_category:  # 遍历所有的实例分割后的标记号码以及对应的分类
             node = {}  # 可以有很多node
             node['category'] = int(category)  # 不同node的category可以相同
@@ -368,7 +366,7 @@ def write2pickle_single_pic_crop(train_dir, pkl_dir, name, count_num):
 
         # 将再次处理后的信息存入pkl文件
         pkl_path = path.replace(train_dir, pkl_dir)  # 将原图片的路径改为pkl的路径
-        pkl_path = pkl_path.replace('.png', '_'+str(index_crop + 1) + '.pkl')  # 将原图片的png改为pkl后缀
+        pkl_path = pkl_path.replace('.png', '_' + str(index_crop + 1) + '.pkl')  # 将原图片的png改为pkl后缀
         # 上述两步骤操作只是创创建了新的文件
         pkl_file = open(pkl_path, 'wb')
         # 保存了 内部区域的标注，外部墙的标记，内部墙的标记，字典-房间的质点  # 其实只有这些

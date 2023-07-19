@@ -937,6 +937,8 @@ if __name__ == '__main__':
     #
     # count_debut = 1011
 
+    # F:\Dataset_zjkj_4_channel_graph ################################ 新的地址
+
     dxf_file = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example'
 
     png_file_zjkj = r'F:\Dataset_zjkj_4_channel_graph\CAD_layout\example\dataset_png_zjkj'
